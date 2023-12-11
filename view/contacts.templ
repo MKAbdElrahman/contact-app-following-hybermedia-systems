@@ -1,0 +1,16 @@
+package view
+
+import "fmt"
+import "app/domain"
+
+type ContactsPageData struct {
+	Contacts []domain.Contact
+}
+
+func toString(data ContactsPageData) string {
+	return fmt.Sprintf("%+v", data)
+}
+
+templ ContactsPage(data  ContactsPageData) {
+	{ toString(data) }
+}
