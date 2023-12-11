@@ -43,8 +43,12 @@ func main() {
 
 	contactHandler := handler.NewContactHandler(contactService, view)
 
+	e.HTTPErrorHandler = handler.CustomHTTPErrorHandler
+
 	e.GET("/", HandleIndex)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
+	e.GET("/contacts/:id", contactHandler.HandleGetContactByID)
+
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
 

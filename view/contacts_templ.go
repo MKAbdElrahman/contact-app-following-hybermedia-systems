@@ -167,8 +167,6 @@ func ContactTable(contact domain.Contact) templ.Component {
 	})
 }
 
-// ContactsPageBody is a template for rendering the contacts page body.
-
 func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)

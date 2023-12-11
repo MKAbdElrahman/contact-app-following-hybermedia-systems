@@ -42,3 +42,12 @@ func (store *InMemoryContactStore) GetContacts(ctx context.Context, query string
 
 	return results, nil
 }
+
+func (store *InMemoryContactStore) GetContactByID(ctx context.Context, id int) (*domain.Contact, error) {
+	for _, contact := range store.contacts {
+		if contact.ID == id {
+			return &contact, nil
+		}
+	}
+	return nil, domain.ErrorContactNotFound
+}

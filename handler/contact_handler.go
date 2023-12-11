@@ -4,8 +4,10 @@ import (
 	"app/domain"
 	"app/service"
 	"app/view"
+	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -32,6 +34,29 @@ func (h *contactHandler) HandleGetContacts(c echo.Context) error {
 	return h.view.RenderContactsPage(c, view.ContactsPageData{
 		Contacts: data,
 		Query:    c.QueryParam("q"),
+	})
+}
+
+func (h *contactHandler) HandleGetContactByID(c echo.Context) error {
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return err
+	}
+
+	data, err := h.contactService.ContactStore.GetContactByID(c.Request().Context(), id)
+	if err != nil {
+		if errors.Is(err, domain.ErrorContactNotFound) {
+			return echo.ErrNotFound
+		} else {
+			return echo.ErrInternalServerError
+		}
+
+	}
+
+	return h.view.RenderViewContactPage(c, view.ViewContactPageData{
+		Contact: *data,
 	})
 }
 

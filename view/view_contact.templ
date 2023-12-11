@@ -1,0 +1,30 @@
+package view
+
+import "app/domain"
+
+type ViewContactPageData struct {
+	Contact domain.Contact
+}
+
+templ ViewContactPageBody(c context.Context, data ViewContactPageData) {
+	<div class="contacts-container">
+		<table class="contacts-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@ContactTable(data.Contact)
+			</tbody>
+		</table>
+		<p class="add-contact-link">
+			<a href="/contacts/new">Add Contact</a>
+		</p>
+	</div>
+}
