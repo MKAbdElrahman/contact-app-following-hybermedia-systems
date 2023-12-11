@@ -1,27 +1,20 @@
 package view
 
 import "app/domain"
+import "fmt"
 
 type ViewContactPageData struct {
 	Contact domain.Contact
 }
 
 templ ViewContactPageBody(c context.Context, data ViewContactPageData) {
-	<div class="contacts-container">
-		<table class="contacts-table">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Phone</th>
-					<th>Email</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				@ContactTable(data.Contact)
-			</tbody>
-		</table>
+	<h1>{ data.Contact.FirstName } { data.Contact.LastName }</h1>
+	<div>
+		<div>Phone: { data.Contact.Phone }</div>
+		<div>Email: { data.Contact.Email }</div>
 	</div>
+	<p>
+		<a href={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } class="action-link">Edit</a>
+		<a href="/contacts">Back</a>
+	</p>
 }

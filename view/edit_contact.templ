@@ -1,0 +1,45 @@
+package view
+
+import "fmt"
+import "app/domain"
+
+type EditContactPageData struct {
+	Contact domain.Contact
+}
+
+templ EditContactPageBody(c context.Context, data EditContactPageData) {
+	<form action={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } method="post">
+		<fieldset>
+			<legend>Contact Values</legend>
+			<p>
+				<label for="email">Email</label>
+				<input name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
+			</p>
+			<p>
+				<label for="first_name">First Name</label>
+				<input
+ 					name="first_name"
+ 					id="first_name"
+ 					type="text"
+ 					placeholder="First Name"
+ 					value={ data.Contact.FirstName }
+				/>
+			</p>
+			<p>
+				<label for="last_name">Last Name</label>
+				<input
+ 					name="last_name"
+ 					id="last_name"
+ 					type="text"
+ 					placeholder="Last Name"
+ 					value={ data.Contact.LastName }
+				/>
+			</p>
+			<p>
+				<label for="phone">Phone</label>
+				<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
+			</p>
+			<button>Save</button>
+		</fieldset>
+	</form>
+}

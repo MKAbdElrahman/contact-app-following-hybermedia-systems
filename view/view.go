@@ -25,6 +25,13 @@ func (r *View) RenderViewContactPage(c echo.Context, data ViewContactPageData) e
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }
 
+func (r *View) RenderEditContactPage(c echo.Context, data EditContactPageData) error {
+
+	page := Layout("Edit Contact", EditContactPageBody(c.Request().Context(), data))
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
 func (r *View) RenderAddContactPage(c echo.Context, data AddContactPageData) error {
 
 	page := Layout("New Contact", AddContactPageBody(c.Request().Context(), data))

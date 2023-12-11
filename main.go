@@ -47,7 +47,10 @@ func main() {
 
 	e.GET("/", HandleIndex)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
-	e.GET("/contacts/:id", contactHandler.HandleGetContactByID)
+	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
+
+	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)
+	// e.POST("/contacts/:id/edit", contactHandler.HandlePostEditContactByID)
 
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)

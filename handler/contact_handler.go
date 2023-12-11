@@ -64,6 +64,30 @@ func (h *contactHandler) HandleGetAddContact(c echo.Context) error {
 	return h.view.RenderAddContactPage(c, view.AddContactPageData{})
 }
 
+func (h *contactHandler) HandleGetEditPage(c echo.Context) error {
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return err
+	}
+
+	contact, err := h.contactService.ContactStore.GetContactByID(c.Request().Context(), id)
+	if err != nil {
+		if errors.Is(err, domain.ErrorContactNotFound) {
+			return echo.ErrNotFound
+		} else {
+			return echo.ErrInternalServerError
+		}
+
+	}
+
+	return h.view.RenderEditContactPage(c, view.EditContactPageData{
+
+		Contact: *contact,
+	})
+}
+
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
 
 	var contact domain.Contact
