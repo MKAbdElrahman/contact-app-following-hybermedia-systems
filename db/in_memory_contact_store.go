@@ -2,6 +2,7 @@ package db
 
 import (
 	"app/domain"
+	"app/service"
 	"context"
 	"strings"
 )
@@ -50,4 +51,26 @@ func (store *InMemoryContactStore) GetContactByID(ctx context.Context, id int) (
 		}
 	}
 	return nil, domain.ErrorContactNotFound
+}
+
+func (store *InMemoryContactStore) UpdateContact(ctx context.Context, id int, updateParams service.ContactUpdateParams) error {
+	for i, contact := range store.contacts {
+		if contact.ID == id {
+			// Update the contact fields if non-empty in the updateParams
+			if updateParams.FirstName != "" {
+				store.contacts[i].FirstName = updateParams.FirstName
+			}
+			if updateParams.LastName != "" {
+				store.contacts[i].LastName = updateParams.LastName
+			}
+			if updateParams.Phone != "" {
+				store.contacts[i].Phone = updateParams.Phone
+			}
+			if updateParams.Email != "" {
+				store.contacts[i].Email = updateParams.Email
+			}
+			return nil
+		}
+	}
+	return domain.ErrorContactNotFound
 }

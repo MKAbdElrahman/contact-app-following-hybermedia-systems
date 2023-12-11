@@ -88,6 +88,30 @@ func (h *contactHandler) HandleGetEditPage(c echo.Context) error {
 	})
 }
 
+func (h *contactHandler) HandlePostedContactEdit(c echo.Context) error {
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return err
+	}
+
+	var contact service.ContactUpdateParams
+
+	contact.FirstName = c.FormValue("firstName")
+	contact.LastName = c.FormValue("lastName")
+	contact.Email = c.FormValue("email")
+	contact.Phone = c.FormValue("phone")
+
+	err = h.contactService.ContactStore.UpdateContact(c.Request().Context(), id, contact)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	return c.Redirect(http.StatusFound, "/contacts")
+}
+
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
 
 	var contact domain.Contact

@@ -22,8 +22,8 @@ func main() {
 
 	contactStore := db.NewInMemoryContactStore()
 	contacts := []domain.Contact{
-		{FirstName: "Mohamed", LastName: "Ali", Email: "mohamed45@gmail.com", Phone: "+201148985854"},
-		{FirstName: "Mohamed", LastName: "Tamer", Email: "tamer@gmail.com", Phone: "+201145865478"},
+		{FirstName: "Mohamed", LastName: "Ali", Email: "mohamed.ali@example.com", Phone: "+211111111111"},
+		{FirstName: "Sayed", LastName: "Kamal", Email: "sayed.kamal@example.com", Phone: "+511111111111"},
 		{FirstName: "John", LastName: "Doe", Email: "john.doe@example.com", Phone: "+1234567890"},
 		{FirstName: "Jane", LastName: "Doe", Email: "jane.doe@example.com", Phone: "+9876543210"},
 		{FirstName: "Alice", LastName: "Smith", Email: "alice.smith@example.com", Phone: "+1122334455"},
@@ -50,7 +50,7 @@ func main() {
 	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
 
 	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)
-	// e.POST("/contacts/:id/edit", contactHandler.HandlePostEditContactByID)
+	e.POST("/contacts/:id/edit", contactHandler.HandlePostedContactEdit)
 
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)

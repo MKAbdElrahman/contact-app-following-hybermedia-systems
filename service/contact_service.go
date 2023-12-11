@@ -5,8 +5,16 @@ import (
 	"context"
 )
 
+type ContactUpdateParams struct {
+	FirstName string
+	LastName  string
+	Email     string
+	Phone     string
+}
+
 type ContactStore interface {
 	AddContact(ctx context.Context, contact domain.Contact) error
+	UpdateContact(ctx context.Context, id int, params ContactUpdateParams) error
 	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)
 	GetContactByID(ctx context.Context, id int) (*domain.Contact, error)
 }
