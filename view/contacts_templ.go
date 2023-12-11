@@ -182,72 +182,7 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 			templ_7745c5c3_Var12 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<style>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var13 := `
-		/* Twitter-inspired Theme */
-		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-		.contacts-container {
-			max-width: 800px;
-			margin: 0 auto;
-			text-align: center;
-			background-color: #15202b; /* Twitter Dark Mode background color */
-			color: #ffffff; /* Light text color */
-			font-family: 'Roboto', sans-serif; /* Use Google Font */
-		}
-
-		.search-form {
-			margin-bottom: 20px;
-		}
-
-		.search-form input,
-		.search-form button {
-			padding: 8px;
-			background-color: #192734; /* Twitter Dark Mode input background color */
-			color: #ffffff; /* Light text color */
-			border: 1px solid #38444d; /* Twitter Dark Mode input border color */
-		}
-
-		.search-form button {
-			cursor: pointer;
-		}
-
-		.contacts-table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		.contacts-table th,
-		.contacts-table td {
-			padding: 12px;
-		}
-
-		.contacts-table th {
-			background-color: #1c2938; /* Twitter Dark Mode header background color */
-			color: #ffffff; /* Light text color */
-		}
-
-		.contacts-table a {
-			color: #1da1f2; /* Twitter Blue link color */
-		}
-
-		.add-contact-link {
-			margin-top: 20px;
-		}
-
-		.action-link {
-			color: #1da1f2; /* Twitter Blue action link color */
-			margin-right: 10px;
-		}
-	`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</style><div class=\"contacts-container\"><form action=\"/contacts\" method=\"get\" class=\"search-form\"><input id=\"search\" type=\"search\" name=\"q\" placeholder=\"Search Term\" value=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"contacts-container\"><form action=\"/contacts\" method=\"get\" class=\"search-form\"><input id=\"search\" type=\"search\" name=\"q\" placeholder=\"Search Term\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -259,8 +194,8 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var14 := `Search`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
+		templ_7745c5c3_Var13 := `Search`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -268,7 +203,16 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var15 := `ID`
+		templ_7745c5c3_Var14 := `ID`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</th><th>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var15 := `First Name`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -277,7 +221,7 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var16 := `First Name`
+		templ_7745c5c3_Var16 := `Last Name`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -286,7 +230,7 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var17 := `Last Name`
+		templ_7745c5c3_Var17 := `Phone`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -295,7 +239,7 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var18 := `Phone`
+		templ_7745c5c3_Var18 := `Email`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -304,17 +248,8 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var19 := `Email`
+		templ_7745c5c3_Var19 := `Actions`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</th><th>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var20 := `Actions`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -332,8 +267,8 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var21 := `Add Contact`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
+		templ_7745c5c3_Var20 := `Add Contact`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -38,66 +38,7 @@ templ ContactTable(contact domain.Contact) {
 	</tr>
 }
 
-// ContactsPageBody is a template for rendering the contacts page body.
-
 templ ContactsPageBody(c context.Context, data ContactsPageData) {
-	<style>
-		/* Twitter-inspired Theme */
-		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-		.contacts-container {
-			max-width: 800px;
-			margin: 0 auto;
-			text-align: center;
-			background-color: #15202b; /* Twitter Dark Mode background color */
-			color: #ffffff; /* Light text color */
-			font-family: 'Roboto', sans-serif; /* Use Google Font */
-		}
-
-		.search-form {
-			margin-bottom: 20px;
-		}
-
-		.search-form input,
-		.search-form button {
-			padding: 8px;
-			background-color: #192734; /* Twitter Dark Mode input background color */
-			color: #ffffff; /* Light text color */
-			border: 1px solid #38444d; /* Twitter Dark Mode input border color */
-		}
-
-		.search-form button {
-			cursor: pointer;
-		}
-
-		.contacts-table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		.contacts-table th,
-		.contacts-table td {
-			padding: 12px;
-		}
-
-		.contacts-table th {
-			background-color: #1c2938; /* Twitter Dark Mode header background color */
-			color: #ffffff; /* Light text color */
-		}
-
-		.contacts-table a {
-			color: #1da1f2; /* Twitter Blue link color */
-		}
-
-		.add-contact-link {
-			margin-top: 20px;
-		}
-
-		.action-link {
-			color: #1da1f2; /* Twitter Blue action link color */
-			margin-right: 10px;
-		}
-	</style>
 	<div class="contacts-container">
 		<form action="/contacts" method="get" class="search-form">
 			<input id="search" type="search" name="q" placeholder="Search Term" value={ data.Query }/>
