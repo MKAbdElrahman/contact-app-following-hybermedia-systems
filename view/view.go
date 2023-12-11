@@ -1,8 +1,6 @@
 package view
 
 import (
-	"app/domain"
-
 	"github.com/labstack/echo/v4"
 )
 
@@ -13,13 +11,9 @@ func NewView() *View {
 	return &View{}
 }
 
-func (r *View) RenderContactsPage(c echo.Context, data []domain.Contact) error {
+func (r *View) RenderContactsPage(c echo.Context, data ContactsPageData) error {
 
-	d := ContactsPageData{
-		Contacts: data,
-	}
-
-	page := Layout("Contacts", ContactsPageBody(d))
+	page := Layout("Contacts", ContactsPageBody(c.Request().Context(), data))
 
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }

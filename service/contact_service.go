@@ -7,7 +7,7 @@ import (
 
 type ContactStore interface {
 	AddContact(ctx context.Context, contact domain.Contact) error
-	GetContacts(ctx context.Context) ([]domain.Contact, error)
+	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)
 }
 
 type ContactService struct {

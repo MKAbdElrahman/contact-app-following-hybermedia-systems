@@ -1,16 +1,127 @@
 package view
 
-import "fmt"
-import "app/domain"
+import (
+	"fmt"
+	"app/domain"
+)
 
+// ContactsPageData represents the data structure for the contacts page.
 type ContactsPageData struct {
+	Query    string
 	Contacts []domain.Contact
 }
 
+// toString converts ContactsPageData to a string representation.
 func toString(data ContactsPageData) string {
 	return fmt.Sprintf("%+v", data)
 }
 
-templ ContactsPageBody(data  ContactsPageData) {
-	{ toString(data) }
+// ActionComponent is a template for rendering actions for a contact.
+
+templ ActionComponent(c domain.Contact) {
+	<td>
+		<a href={ "/contacts/" + templ.URL(fmt.Sprint(c.ID)) + "/edit" } class="action-link">Edit</a>
+		<a href={ "/contacts/" + templ.URL(fmt.Sprint(c.ID)) + "/view" } class="action-link">View</a>
+	</td>
+}
+
+// ContactTable is a template for rendering a contact as a table row.
+
+templ ContactTable(contact domain.Contact) {
+	<tr>
+		<td>{ fmt.Sprint(contact.ID) }</td>
+		<td>{ contact.FirstName }</td>
+		<td>{ contact.LastName }</td>
+		<td>{ contact.Phone }</td>
+		<td>{ contact.Email }</td>
+		@ActionComponent(contact)
+	</tr>
+}
+
+// ContactsPageBody is a template for rendering the contacts page body.
+
+templ ContactsPageBody(c context.Context, data ContactsPageData) {
+	<style>
+		/* Twitter-inspired Theme */
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+		.contacts-container {
+			max-width: 800px;
+			margin: 0 auto;
+			text-align: center;
+			background-color: #15202b; /* Twitter Dark Mode background color */
+			color: #ffffff; /* Light text color */
+			font-family: 'Roboto', sans-serif; /* Use Google Font */
+		}
+
+		.search-form {
+			margin-bottom: 20px;
+		}
+
+		.search-form input,
+		.search-form button {
+			padding: 8px;
+			background-color: #192734; /* Twitter Dark Mode input background color */
+			color: #ffffff; /* Light text color */
+			border: 1px solid #38444d; /* Twitter Dark Mode input border color */
+		}
+
+		.search-form button {
+			cursor: pointer;
+		}
+
+		.contacts-table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.contacts-table th,
+		.contacts-table td {
+			padding: 12px;
+		}
+
+		.contacts-table th {
+			background-color: #1c2938; /* Twitter Dark Mode header background color */
+			color: #ffffff; /* Light text color */
+		}
+
+		.contacts-table a {
+			color: #1da1f2; /* Twitter Blue link color */
+		}
+
+		.add-contact-link {
+			margin-top: 20px;
+		}
+
+		.action-link {
+			color: #1da1f2; /* Twitter Blue action link color */
+			margin-right: 10px;
+		}
+	</style>
+	<div class="contacts-container">
+		<form action="/contacts" method="get" class="search-form">
+			<input id="search" type="search" name="q" placeholder="Search Term" value={ data.Query }/>
+			<button type="submit">Search</button>
+		</form>
+		<table class="contacts-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				for _, contact := range data.Contacts {
+					@ContactTable(contact)
+				}
+			</tbody>
+		</table>
+		<p class="add-contact-link">
+			<a href="/contacts/new">Add Contact</a>
+		</p>
+	</div>
 }

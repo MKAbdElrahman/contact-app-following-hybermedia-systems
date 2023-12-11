@@ -20,11 +20,14 @@ func NewContactHandler(c *service.ContactService, v *view.View) *contactHandler 
 }
 
 func (h *contactHandler) HandleGetContacts(c echo.Context) error {
-	data, err := h.contactService.ContactStore.GetContacts(c.Request().Context())
 
+	data, err := h.contactService.ContactStore.GetContacts(c.Request().Context(), c.QueryParam("q"))
 	if err != nil {
 		return err
 	}
 
-	return h.view.RenderContactsPage(c, data)
+	return h.view.RenderContactsPage(c, view.ContactsPageData{
+		Contacts: data,
+		Query:    c.QueryParam("q"),
+	})
 }
