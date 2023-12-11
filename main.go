@@ -45,7 +45,8 @@ func main() {
 
 	e.GET("/", HandleIndex)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
-	
+	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
+	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
