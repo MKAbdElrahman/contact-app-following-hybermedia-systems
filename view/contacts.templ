@@ -11,6 +11,6 @@ func toString(data ContactsPageData) string {
 	return fmt.Sprintf("%+v", data)
 }
 
-templ ContactsPage(data  ContactsPageData) {
+templ ContactsPageBody(data  ContactsPageData) {
 	{ toString(data) }
 }

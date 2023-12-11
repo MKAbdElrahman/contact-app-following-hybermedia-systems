@@ -18,5 +18,8 @@ func (r *View) RenderContactsPage(c echo.Context, data []domain.Contact) error {
 	d := ContactsPageData{
 		Contacts: data,
 	}
-	return ContactsPage(d).Render(c.Request().Context(), c.Response().Writer)
+
+	page := Layout("Contacts", ContactsPageBody(d))
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
 }
