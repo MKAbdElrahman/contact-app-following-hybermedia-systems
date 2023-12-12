@@ -1,0 +1,12 @@
+package view
+
+type IndexPageData struct {
+}
+
+templ IndexPageBody(c context.Context, data IndexPageData) {
+	<div id="main">
+		<button hx-get="/contacts" hx-target="#main" hx-swap="beforebegin">
+			Get The Contacts
+		</button>
+	</div>
+}

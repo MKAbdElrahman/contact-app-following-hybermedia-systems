@@ -11,6 +11,13 @@ func NewView() *View {
 	return &View{}
 }
 
+func (r *View) RenderIndexPage(c echo.Context, data IndexPageData) error {
+
+	page := Layout("Home", IndexPageBody(c.Request().Context(), data))
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
 func (r *View) RenderContactsPage(c echo.Context, data ContactsPageData) error {
 
 	page := Layout("Contacts", ContactsPageBody(c.Request().Context(), data))

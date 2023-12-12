@@ -8,14 +8,8 @@ import (
 	"app/view"
 	"context"
 
-	"net/http"
-
 	"github.com/labstack/echo/v4"
 )
-
-func HandleIndex(c echo.Context) error {
-	return c.Redirect(http.StatusFound, "/contacts")
-}
 
 func main() {
 	e := echo.New()
@@ -41,11 +35,14 @@ func main() {
 
 	view := view.NewView()
 
+	indexPageHandler := handler.IndexPageHandler{}
 	contactHandler := handler.NewContactHandler(contactService, view)
+
+	e.Static("/static", "assets")
 
 	e.HTTPErrorHandler = handler.CustomHTTPErrorHandler
 
-	e.GET("/", HandleIndex)
+	e.GET("/", indexPageHandler.HandleGetIndexPage)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
 	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
 
