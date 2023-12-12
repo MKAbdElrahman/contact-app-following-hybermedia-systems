@@ -146,3 +146,20 @@ func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
 
 	return c.Redirect(http.StatusFound, "/contacts")
 }
+
+func (h *contactHandler) HandleGetSearchContactsPage(c echo.Context) error {
+	return h.view.RenderSearchContactsPage(c, view.SearchContactsPageData{})
+}
+
+func (h *contactHandler) HandlePostSearchContactsPage(c echo.Context) error {
+
+	data, err := h.contactService.ContactStore.GetContacts(c.Request().Context(), c.FormValue("q"))
+	if err != nil {
+		return err
+	}
+
+	return h.view.RenderContactsPage(c, view.ContactsPageData{
+		Contacts: data,
+		Query:    c.QueryParam("q"),
+	})
+}

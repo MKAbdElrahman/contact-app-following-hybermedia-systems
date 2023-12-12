@@ -44,6 +44,11 @@ func main() {
 
 	e.GET("/", indexPageHandler.HandleGetIndexPage)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
+
+	e.GET("/contacts/search", contactHandler.HandleGetSearchContactsPage)
+	e.POST("/contacts/search", contactHandler.HandlePostSearchContactsPage)
+
+	
 	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
 
 	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)

@@ -5,8 +5,10 @@ type IndexPageData struct {
 
 templ IndexPageBody(c context.Context, data IndexPageData) {
 	<div id="main">
-		<button hx-get="/contacts" hx-target="#main" hx-swap="beforebegin">
-			Get The Contacts
+		<h1>Home Page</h1>
+		<h2>Search</h2>
+		<button hx-get="/contacts/search" hx-target="#main" hx-swap="outerHTML">
+			Search for Contacts
 		</button>
 	</div>
 }

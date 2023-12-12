@@ -1,0 +1,29 @@
+package view
+
+import (
+	"github.com/labstack/echo/v4"
+)
+
+func (r *View) RenderSearchContactsPage(c echo.Context, data SearchContactsPageData) error {
+
+	page := Layout("Search", SearchContactsPageBody(c.Request().Context(), data))
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
+type SearchContactsPageData struct {
+	Query string
+}
+
+templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
+	<div id="main">
+		<form>
+			<label for="search">Contacts:</label>
+			<input id="search" name="q" type="search" placeholder="Search Contacts"/>
+			<button hx-get="/contacts" hx-target="#search-results" hx-swap="outerHtml" hx-include="#search">
+				Search
+			</button>
+		</form>
+		<div id="search-results"></div>
+	</div>
+}

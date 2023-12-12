@@ -40,11 +40,7 @@ templ ContactTable(contact domain.Contact) {
 
 templ ContactsPageBody(c context.Context, data ContactsPageData) {
 	<div class="contacts-container">
-		<form action="/contacts" method="get" class="search-form">
-			<input id="search" type="search" name="q" placeholder="Search Term" value={ data.Query }/>
-			<button type="submit">Search</button>
-		</form>
-		<table class="contacts-table">
+		<table class="contacts-table" id="contacts-table">
 			<thead>
 				<tr>
 					<th>ID</th>
