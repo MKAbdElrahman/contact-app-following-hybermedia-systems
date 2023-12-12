@@ -74,3 +74,14 @@ func (store *InMemoryContactStore) UpdateContact(ctx context.Context, id int, up
 	}
 	return domain.ErrorContactNotFound
 }
+
+func (store *InMemoryContactStore) DeleteContact(ctx context.Context, id int) error {
+	for i, contact := range store.contacts {
+		if contact.ID == id {
+			// Remove the contact from the slice by slicing it
+			store.contacts = append(store.contacts[:i], store.contacts[i+1:]...)
+			return nil
+		}
+	}
+	return domain.ErrorContactNotFound
+}

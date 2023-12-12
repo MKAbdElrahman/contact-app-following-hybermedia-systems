@@ -112,6 +112,23 @@ func (h *contactHandler) HandlePostedContactEdit(c echo.Context) error {
 	return c.Redirect(http.StatusFound, "/contacts")
 }
 
+func (h *contactHandler) HandlePostedContactDelete(c echo.Context) error {
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return err
+	}
+
+	err = h.contactService.ContactStore.DeleteContact(c.Request().Context(), id)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	return c.Redirect(http.StatusFound, "/contacts")
+}
+
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
 
 	var contact domain.Contact

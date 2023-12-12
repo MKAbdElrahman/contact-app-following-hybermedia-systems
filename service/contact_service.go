@@ -15,6 +15,7 @@ type ContactUpdateParams struct {
 type ContactStore interface {
 	AddContact(ctx context.Context, contact domain.Contact) error
 	UpdateContact(ctx context.Context, id int, params ContactUpdateParams) error
+	DeleteContact(ctx context.Context, id int) error
 	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)
 	GetContactByID(ctx context.Context, id int) (*domain.Contact, error)
 }
@@ -28,3 +29,5 @@ func NewContactService(store ContactStore) *ContactService {
 		ContactStore: store,
 	}
 }
+
+
