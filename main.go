@@ -8,10 +8,13 @@ import (
 	"app/view"
 	"app/view/blog"
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
+	"time"
 
+	"github.com/ardanlabs/conf/v3"
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,6 +29,32 @@ func main() {
 }
 
 func run(ctx context.Context, logger *slog.Logger) error {
+
+	// -------------------------------------------------------------------------
+	// Configuration
+
+	cfg := struct {
+		conf.Version
+		ServerConfig struct {
+			ReadTimeout     time.Duration `conf:"default:5s"`
+			WriteTimeout    time.Duration `conf:"default:10s"`
+			IdleTimeout     time.Duration `conf:"default:120s"`
+			ShutdownTimeout time.Duration `conf:"default:20s"`
+			APIHost         string        `conf:"default:0.0.0.0:3000"`
+		}
+	}{Version: conf.Version{
+		Desc:  "Go+HTMX",
+		Build: "0.0.1",
+	}}
+
+	help, err := conf.Parse("", &cfg)
+	if err != nil {
+		if errors.Is(err, conf.ErrHelpWanted) {
+			fmt.Println(help)
+			return nil
+		}
+		return fmt.Errorf("parsing config: %w", err)
+	}
 
 	e := echo.New()
 
@@ -79,5 +108,5 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	e.GET("/blog", blogHandler.HandleGetIndexPage)
 	e.GET("/blog/contact", blogHandler.HandleGetContactPage)
 
-	return e.Start(":1323")
+	return e.Start(cfg.ServerConfig.APIHost)
 }

@@ -4,6 +4,7 @@ go 1.21.4
 
 require (
 	github.com/a-h/templ v0.2.476
+	github.com/ardanlabs/conf/v3 v3.1.7
 	github.com/labstack/echo/v4 v4.11.3
 )
 
