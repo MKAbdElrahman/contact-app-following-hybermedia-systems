@@ -13,6 +13,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/ardanlabs/conf/v3"
@@ -120,6 +122,8 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		return fmt.Errorf("generating config for output: %w", err)
 	}
 	logger.Info("startup", "config", out)
+	shutdown := make(chan os.Signal, 1)
+	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
 
 	server := http.Server{
 		Addr:         cfg.ServerConfig.APIHost,
@@ -129,5 +133,34 @@ func run(ctx context.Context, logger *slog.Logger) error {
 		IdleTimeout:  cfg.ServerConfig.IdleTimeout,
 		ErrorLog:     slog.NewLogLogger(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{}), slog.LevelError),
 	}
-	return server.ListenAndServe()
+
+	serverErrors := make(chan error, 1)
+
+	go func() {
+		logger.Info("startup", "status", "app router started", "host", server.Addr)
+
+		serverErrors <- server.ListenAndServe()
+	}()
+
+	// -------------------------------------------------------------------------
+	// Shutdown
+
+	select {
+	case err := <-serverErrors:
+		return fmt.Errorf("server error: %w", err)
+
+	case sig := <-shutdown:
+		logger.Info("shutdown", "status", "shutdown started", "signal", sig)
+		defer logger.Info("shutdown", "status", "shutdown complete", "signal", sig)
+
+		ctx, cancel := context.WithTimeout(ctx, cfg.ServerConfig.ShutdownTimeout)
+		defer cancel()
+
+		if err := server.Shutdown(ctx); err != nil {
+			server.Close()
+			return fmt.Errorf("could not stop server gracefully: %w", err)
+		}
+	}
+
+	return nil
 }
