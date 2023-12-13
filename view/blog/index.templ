@@ -1,0 +1,22 @@
+package blog 
+
+import "github.com/labstack/echo/v4"
+
+type IndexPageData struct {
+}
+
+func (r *Blog) RenderIndexPage(c echo.Context, data IndexPageData) error {
+
+	page := Layout("Home", IndexPageBody(c, data))
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
+templ IndexPageBody(c echo.Context, data IndexPageData) {
+	<section id="intro">
+		<h2>Welcome to My Portfolio</h2>
+		<p>
+			Hello! I'm Mohamed Kamal, a passionate programmer who enjoys solving problems and creating innovative solutions. I believe in continuous learning and adapting to new technologies.
+		</p>
+	</section>
+}

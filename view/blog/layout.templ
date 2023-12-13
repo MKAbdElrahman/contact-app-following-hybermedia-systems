@@ -1,0 +1,87 @@
+package blog
+
+templ Layout(title string, body templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>{ title }</title>
+			<script src="https://kit.fontawesome.com/e08a305d54.js" crossorigin="anonymous"></script>
+			<link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet"/>
+			<link rel="stylesheet" href="/static/css/blog.css"/>
+			<script src="/static/js/htmx.min.js"></script>
+		</head>
+		<body>
+			@Navbar()
+			@body
+			@Footer()
+		</body>
+	</html>
+}
+
+templ Footer() {
+	<section id="footer">
+		<footer>
+			<div class="container">
+				<p>&copy; 2023 Mohamed Kamal. All rights reserved.</p>
+			</div>
+		</footer>
+	</section>
+}
+
+templ cv() {
+	<a class="btn" href="/blog/resume">
+		Resume
+	</a>
+}
+
+templ  linkedinIcon() {
+	<a href="https://www.linkedin.com/in/dev-mohamedkamal/">
+		<span class="fa-brands fa-linkedin" aria-hidden="true"></span>
+		<span class="sr-only">
+			Linkedin
+		</span>
+	</a>
+}
+
+templ  githubIcon() {
+	<a href="https://github.com/mkabdelrahman/">
+		<span class="fa-brands fa-github" aria-hidden="true"></span>
+		<span class="sr-only">
+			Linkedin
+		</span>
+	</a>
+}
+
+templ brand() {
+	<h1>
+		<a href="/blog">
+			<span class="fas  fa-code" aria-hidden="true"></span>
+			<span>
+				Mohamed Kamal
+			</span>
+		</a>
+	</h1>
+}
+
+templ Navbar() {
+	<section id="navbar">
+		<nav>
+			<ul>
+				<li>
+					@brand()
+				</li>
+				<li><a href="/blog/posts">Posts</a></li>
+				<li><a href="/blog/contact">Contact</a></li>
+				<li>
+					@linkedinIcon()
+				</li>
+				<li>
+					@githubIcon()
+				</li>
+				<li>
+					@cv()
+				</li>
+			</ul>
+		</nav>
+	</section>
+}

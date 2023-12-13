@@ -6,12 +6,27 @@ import (
 	"app/handler"
 	"app/service"
 	"app/view"
+	"app/view/blog"
 	"context"
+	"fmt"
+	"log/slog"
+	"os"
 
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelError}))
+
+	err := run(context.Background(), logger)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+func run(ctx context.Context, logger *slog.Logger) error {
+
 	e := echo.New()
 
 	contactStore := db.NewInMemoryContactStore()
@@ -29,7 +44,7 @@ func main() {
 		// Add more contacts as needed...
 	}
 	for _, contact := range contacts {
-		contactStore.AddContact(context.Background(), contact)
+		contactStore.AddContact(ctx, contact)
 	}
 	contactService := service.NewContactService(contactStore)
 
@@ -48,7 +63,6 @@ func main() {
 	e.GET("/contacts/search", contactHandler.HandleGetSearchContactsPage)
 	e.POST("/contacts/search", contactHandler.HandlePostSearchContactsPage)
 
-	
 	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
 
 	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)
@@ -59,5 +73,11 @@ func main() {
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
 
-	e.Logger.Fatal(e.Start(":1323"))
+	myBlog := blog.NewBlog()
+	blogHandler := handler.NewBlogHandler(myBlog)
+
+	e.GET("/blog", blogHandler.HandleGetIndexPage)
+	e.GET("/blog/contact", blogHandler.HandleGetContactPage)
+
+	return e.Start(":1323")
 }
