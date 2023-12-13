@@ -11,6 +11,7 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
+	"net/http"
 	"os"
 	"time"
 
@@ -19,7 +20,7 @@ import (
 )
 
 func main() {
-	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelError}))
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
 
 	err := run(context.Background(), logger)
 	if err != nil {
@@ -108,5 +109,25 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	e.GET("/blog", blogHandler.HandleGetIndexPage)
 	e.GET("/blog/contact", blogHandler.HandleGetContactPage)
 
-	return e.Start(cfg.ServerConfig.APIHost)
+	// -------------------------------------------------------------------------
+	// App Starting
+
+	logger.Info("starting app")
+	defer logger.Info("shutdown complete")
+
+	out, err := conf.String(&cfg)
+	if err != nil {
+		return fmt.Errorf("generating config for output: %w", err)
+	}
+	logger.Info("startup", "config", out)
+
+	server := http.Server{
+		Addr:         cfg.ServerConfig.APIHost,
+		Handler:      e,
+		ReadTimeout:  cfg.ServerConfig.ReadTimeout,
+		WriteTimeout: cfg.ServerConfig.WriteTimeout,
+		IdleTimeout:  cfg.ServerConfig.IdleTimeout,
+		ErrorLog:     slog.NewLogLogger(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{}), slog.LevelError),
+	}
+	return server.ListenAndServe()
 }
