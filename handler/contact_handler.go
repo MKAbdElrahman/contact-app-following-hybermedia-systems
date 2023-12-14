@@ -126,7 +126,7 @@ func (h *contactHandler) HandlePostedContactDelete(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusFound, "/contacts")
+	return c.Redirect(http.StatusSeeOther, "/contacts")
 }
 
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {

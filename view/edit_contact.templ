@@ -7,45 +7,61 @@ type EditContactPageData struct {
 	Contact domain.Contact
 }
 
+// templ deleteBtn() {
+// 	<button hx-target="body" hx-push-url="true" hx-delete={ "/contacts/" + fmt.Sprint(templ.URL(fmt.Sprint(data.Contact.ID))) }>
+// 		Delete Contact
+// 	</button>
+// }
+
+func prepareContactDeleteEndPoint(id int) string {
+	return "/contacts/" + fmt.Sprint(id)
+}
+
+templ deleteBtn(name string, endpoint string) {
+	<button hx-confirm="Are you sure you want to delete this contact?" hx-target="body" hx-push-url="true" hx-delete={ endpoint }>
+		{ name }
+	</button>
+}
+
 templ EditContactPageBody(c context.Context, data EditContactPageData) {
-	<form action={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } method="post">
-		<fieldset>
-			<legend>Contact Values</legend>
-			<p>
-				<label for="email">Email</label>
-				<input name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
-			</p>
-			<p>
-				<label for="first_name">First Name</label>
-				<input
- 					name="firstName"
- 					id="firstName"
- 					type="text"
- 					placeholder="First Name"
- 					value={ data.Contact.FirstName }
-				/>
-			</p>
-			<p>
-				<label for="last_name">Last Name</label>
-				<input
- 					name="lastName"
- 					id="lastName"
- 					type="text"
- 					placeholder="Last Name"
- 					value={ data.Contact.LastName }
-				/>
-			</p>
-			<p>
-				<label for="phone">Phone</label>
-				<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
-			</p>
-			<button>Save</button>
-		</fieldset>
-	</form>
-	<form action={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/delete" } method="post">
-		<button>Delete Contact</button>
-	</form>
-	<p>
-		<a href="/contacts/">Back</a>
-	</p>
+	<div id="main">
+		<form action={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } method="post">
+			<fieldset>
+				<legend>Contact Values</legend>
+				<p>
+					<label for="email">Email</label>
+					<input name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
+				</p>
+				<p>
+					<label for="first_name">First Name</label>
+					<input
+ 						name="firstName"
+ 						id="firstName"
+ 						type="text"
+ 						placeholder="First Name"
+ 						value={ data.Contact.FirstName }
+					/>
+				</p>
+				<p>
+					<label for="last_name">Last Name</label>
+					<input
+ 						name="lastName"
+ 						id="lastName"
+ 						type="text"
+ 						placeholder="Last Name"
+ 						value={ data.Contact.LastName }
+					/>
+				</p>
+				<p>
+					<label for="phone">Phone</label>
+					<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
+				</p>
+				<button>Save</button>
+			</fieldset>
+		</form>
+		@deleteBtn("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
+		<p>
+			<a href="/contacts/">Back</a>
+		</p>
+	</div>
 }

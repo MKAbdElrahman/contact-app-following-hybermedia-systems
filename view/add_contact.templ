@@ -6,7 +6,7 @@ templ AddContactPageBody(c context.Context, data AddContactPageData) {
 	<div class="contacts-container">
 		<form action="/contacts/new" method="post" class="add-contact-form">
 			<label for="firstName">First Name:</label>
-			<input type="text" id="firstName" name="firstName" required/>
+			<input type="text" class="first-name" name="firstName" required/>
 			<label for="lastName">Last Name:</label>
 			<input type="text" id="lastName" name="lastName" required/>
 			<label for="phone">Phone:</label>

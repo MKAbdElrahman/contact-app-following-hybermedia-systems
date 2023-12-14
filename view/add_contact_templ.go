@@ -34,7 +34,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input type=\"text\" id=\"firstName\" name=\"firstName\" required> <label for=\"lastName\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input type=\"text\" class=\"first-name\" name=\"firstName\" required> <label for=\"lastName\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

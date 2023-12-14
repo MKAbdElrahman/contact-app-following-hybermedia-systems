@@ -5,18 +5,37 @@ import (
 	"app/view"
 	"app/view/blog"
 	"context"
-	"log/slog"
+	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type Services struct {
 	ContactService *service.ContactService
 }
 
-func NewMux(ctx context.Context, logger *slog.Logger, services Services) *echo.Echo {
+type ServerConfig struct {
+	ReadTimeout     time.Duration `conf:"default:5s"`
+	WriteTimeout    time.Duration `conf:"default:10s"`
+	IdleTimeout     time.Duration `conf:"default:120s"`
+	ShutdownTimeout time.Duration `conf:"default:20s"`
+	APIHost         string        `conf:"default:0.0.0.0:3000"`
+}
+
+func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.Echo {
 
 	e := echo.New()
+
+	e.Server.ReadTimeout = cfg.ReadTimeout
+	e.Server.WriteTimeout = cfg.WriteTimeout
+	e.Server.IdleTimeout = cfg.IdleTimeout
+	e.Server.Addr = cfg.APIHost
+
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format:           "time=${time_custom}, method=${method}, uri=${uri}, status=${status}, latency=${latency_human}\n",
+		CustomTimeFormat: "15:04",
+	}))
 
 	view := view.NewView()
 
@@ -38,7 +57,7 @@ func NewMux(ctx context.Context, logger *slog.Logger, services Services) *echo.E
 	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)
 	e.POST("/contacts/:id/edit", contactHandler.HandlePostedContactEdit)
 
-	e.POST("/contacts/:id/delete", contactHandler.HandlePostedContactDelete)
+	e.DELETE("/contacts/:id", contactHandler.HandlePostedContactDelete)
 
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
@@ -48,6 +67,5 @@ func NewMux(ctx context.Context, logger *slog.Logger, services Services) *echo.E
 
 	e.GET("/blog", blogHandler.HandleGetIndexPage)
 	e.GET("/blog/contact", blogHandler.HandleGetContactPage)
-
 	return e
 }

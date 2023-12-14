@@ -1,0 +1,137 @@
+/* Global variables */
+:root {
+    --black: #171321;
+    --dkblue: #0d314b;
+    --plum: #4b0d49;
+    --hotmag: #ff17e4;
+    --magenta: #e310cb;
+    --aqua: #86fbfb;
+    --white: #f7f8fa;
+    --font-size: 1.3rem;
+    --mono: "Oxygen mono", monospace;
+    --sans: Oxygen, sans-serif;
+}
+
+/* Box model */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 1rem;
+    font-family: var(--sans);
+    background-color: var(--black);
+    color: var(--white);
+    font-size: var(--font-size);
+}
+
+/* Shared styles for contacts pages */
+.contacts-page-container,
+.main,
+.contacts-container {
+    margin: 2rem;
+}
+
+/* Table styles */
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.contacts-table th,
+.contacts-table td {
+    border: 1px solid var(--white);
+    padding: 0.5rem;
+}
+
+.contact-id,
+.first-name,
+.last-name,
+.phone,
+.email,
+.actions,
+label {
+    text-align: left;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--aqua);
+}
+
+/* Add Contact Link */
+.add-contact-link {
+    margin-top: 1rem;
+    color: var(--aqua);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.add-contact-link:hover {
+    color: var(--hotmag);
+}
+
+/* Form styles */
+form,
+.add-contact-form {
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: var(--font-size);
+    margin-bottom: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size);
+    background-color: var(--hotmag);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--magenta);
+}
+
+/* Search results */
+.search-results {
+    margin-top: 1rem;
+    border: 1px solid var(--white);
+    padding: 1rem;
+    color: var(--white);
+}
+
+/* Table Header styles */
+.contacts-table thead {
+    background-color: var(--dkblue);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    /* Adjust the spacing between headers as needed */
+}
+
+.contacts-table th {
+    flex: 1;
+    padding: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    /* Adjust the text alignment as needed */
+}
+
+.contacts-table th:first-child {
+    border-top-left-radius: 5px;
+}
+
+.contacts-table th:last-child {
+    border-top-right-radius: 5px;
+}

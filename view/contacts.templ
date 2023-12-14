@@ -39,18 +39,8 @@ templ ContactTable(contact domain.Contact) {
 }
 
 templ ContactsPageBody(c context.Context, data ContactsPageData) {
-	<div class="contacts-container">
-		<table class="contacts-table" id="contacts-table">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Phone</th>
-					<th>Email</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
+	<div class="contacts-page-container">
+		<table class="contacts-table">
 			<tbody>
 				for _, contact := range data.Contacts {
 					@ContactTable(contact)
@@ -58,7 +48,7 @@ templ ContactsPageBody(c context.Context, data ContactsPageData) {
 			</tbody>
 		</table>
 		<p class="add-contact-link">
-			<a href="/contacts/new">Add Contact</a>
+			<a class="add-contact-link" href="/contacts/new">Add Contact</a>
 		</p>
 	</div>
 }
