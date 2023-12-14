@@ -135,3 +135,16 @@ button:hover {
 .contacts-table th:last-child {
     border-top-right-radius: 5px;
 }
+
+
+
+.validation-error {
+    color: #ff0000;
+    /* Red text color for errors */
+    font-size: 14px;
+    /* Adjust the font size for errors */
+    margin-top: 5px;
+    /* Add some space above the error message */
+    display: block;
+    /* Ensure error messages appear on a new line */
+}

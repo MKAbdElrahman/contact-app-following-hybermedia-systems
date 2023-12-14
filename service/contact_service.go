@@ -18,6 +18,7 @@ type ContactStore interface {
 	DeleteContact(ctx context.Context, id int) error
 	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)
 	GetContactByID(ctx context.Context, id int) (*domain.Contact, error)
+	GetContactByEmail(ctx context.Context, email string) (*domain.Contact, error)
 }
 
 type ContactService struct {
@@ -29,5 +30,3 @@ func NewContactService(store ContactStore) *ContactService {
 		ContactStore: store,
 	}
 }
-
-

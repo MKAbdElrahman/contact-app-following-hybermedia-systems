@@ -53,6 +53,15 @@ func (store *InMemoryContactStore) GetContactByID(ctx context.Context, id int) (
 	return nil, domain.ErrorContactNotFound
 }
 
+func (store *InMemoryContactStore) GetContactByEmail(ctx context.Context, email string) (*domain.Contact, error) {
+	for _, contact := range store.contacts {
+		if contact.Email == email {
+			return &contact, nil
+		}
+	}
+	return nil, domain.ErrorContactNotFound
+}
+
 func (store *InMemoryContactStore) UpdateContact(ctx context.Context, id int, updateParams service.ContactUpdateParams) error {
 	for i, contact := range store.contacts {
 		if contact.ID == id {

@@ -18,6 +18,13 @@ func (r *View) RenderIndexPage(c echo.Context, data IndexPageData) error {
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }
 
+func (r *View) RenderValidationError(c echo.Context, msg string) error {
+
+	page := ValidationError(msg)
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
 func (r *View) RenderContactsPage(c echo.Context, data ContactsPageData) error {
 
 	page := Layout("Contacts", ContactsPageBody(c.Request().Context(), data))

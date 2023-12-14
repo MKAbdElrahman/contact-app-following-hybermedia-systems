@@ -26,6 +26,7 @@ type ServerConfig struct {
 func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.Echo {
 
 	e := echo.New()
+	e.HideBanner = true
 
 	e.Server.ReadTimeout = cfg.ReadTimeout
 	e.Server.WriteTimeout = cfg.WriteTimeout
@@ -53,6 +54,7 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 	e.POST("/contacts/search", contactHandler.HandlePostSearchContactsPage)
 
 	e.GET("/contacts/:id/view", contactHandler.HandleGetContactByID)
+	e.GET("/contacts/:id/email", contactHandler.ValidateEmail)
 
 	e.GET("/contacts/:id/edit", contactHandler.HandleGetEditPage)
 	e.POST("/contacts/:id/edit", contactHandler.HandlePostedContactEdit)

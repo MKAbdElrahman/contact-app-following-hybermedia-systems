@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -58,6 +59,30 @@ func (h *contactHandler) HandleGetContactByID(c echo.Context) error {
 	return h.view.RenderViewContactPage(c, view.ViewContactPageData{
 		Contact: *data,
 	})
+}
+
+func (h *contactHandler) ValidateEmail(c echo.Context) error {
+
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return echo.ErrBadRequest
+	}
+
+	newEmail := strings.TrimSpace(c.FormValue("email"))
+	fmt.Println(newEmail)
+
+	contact, _ := h.contactService.ContactStore.GetContactByEmail(c.Request().Context(), newEmail)
+
+	fmt.Println(contact)
+
+	if contact != nil { // there is a contact found with this email
+		if contact.ID != id {
+			return h.view.RenderValidationError(c, "email already taken")
+		}
+	}
+
+	return nil
 }
 
 func (h *contactHandler) HandleGetAddContact(c echo.Context) error {
