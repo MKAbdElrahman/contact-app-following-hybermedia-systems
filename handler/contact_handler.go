@@ -26,15 +26,34 @@ func NewContactHandler(c *service.ContactService, v *view.View) *contactHandler 
 }
 
 func (h *contactHandler) HandleGetContacts(c echo.Context) error {
+	const pageSize = 10 // Number of contacts per page
 
-	data, err := h.contactService.ContactStore.GetContacts(c.Request().Context(), c.QueryParam("q"))
+	// Retrieve the query parameter and current page from the request
+	query := c.QueryParam("q")
+	page, err := strconv.Atoi(c.QueryParam("page"))
+	if err != nil || page < 1 {
+		page = 1 // Default to page 1 if the page parameter is not valid
+	}
+
+	// Retrieve contacts data with pagination information
+	data, err := h.contactService.ContactStore.GetContactsPaginated(c.Request().Context(), query, page, pageSize)
 	if err != nil {
 		return err
 	}
 
+	// Calculate the total number of pages based on the total number of contacts and the page size
+	totalContacts, err := h.contactService.ContactStore.GetTotalContacts(c.Request().Context(), query)
+	if err != nil {
+		return err
+	}
+	totalPages := (totalContacts + pageSize - 1) / pageSize
+
+	// Render the contacts page with pagination information
 	return h.view.RenderContactsPage(c, view.ContactsPageData{
-		Contacts: data,
-		Query:    c.QueryParam("q"),
+		Contacts:    data,
+		Query:       query,
+		CurrentPage: page,
+		TotalPages:  totalPages,
 	})
 }
 

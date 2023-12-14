@@ -7,8 +7,10 @@ import (
 
 // ContactsPageData represents the data structure for the contacts page.
 type ContactsPageData struct {
-	Query    string
-	Contacts []domain.Contact
+	Query       string
+	Contacts    []domain.Contact
+	CurrentPage int
+	TotalPages  int
 }
 
 // toString converts ContactsPageData to a string representation.
@@ -50,5 +52,15 @@ templ ContactsPageBody(c context.Context, data ContactsPageData) {
 		<p class="add-contact-link">
 			<a class="add-contact-link" href="/contacts/new">Add Contact</a>
 		</p>
+		<div>
+			<span style="float: center">
+				if  data.CurrentPage > 1 {
+					<a href={ templ.SafeURL(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1)) }>Previous</a>
+				}
+				if len(data.Contacts) == 10 {
+					<a href={ templ.SafeURL(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1)) }>Next</a>
+				}
+			</span>
+		</div>
 	</div>
 }

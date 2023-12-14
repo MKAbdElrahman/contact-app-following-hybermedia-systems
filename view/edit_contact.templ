@@ -31,7 +31,7 @@ templ EditContactPageBody(c context.Context, data EditContactPageData) {
 				<legend>Contact Values</legend>
 				<p>
 					<label for="email">Email</label>
-					<input hx-get={ fmt.Sprintf("/contacts/%d/email", data.Contact.ID) } hx-target="next .validation-error" name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
+					<input hx-trigger="change, keyup delay:200ms changed" hx-get={ fmt.Sprintf("/contacts/%d/email", data.Contact.ID) } hx-target="next .validation-error" name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
 					<span class="validation-error"></span>
 				</p>
 				<p>

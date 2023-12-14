@@ -19,6 +19,8 @@ type ContactStore interface {
 	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)
 	GetContactByID(ctx context.Context, id int) (*domain.Contact, error)
 	GetContactByEmail(ctx context.Context, email string) (*domain.Contact, error)
+	GetContactsPaginated(ctx context.Context, query string, page, pageSize int) ([]domain.Contact, error)
+	GetTotalContacts(ctx context.Context, query string) (int, error)
 }
 
 type ContactService struct {
