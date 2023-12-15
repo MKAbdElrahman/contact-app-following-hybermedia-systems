@@ -110,7 +110,27 @@ func (store *InMemoryContactStore) GetContactsPaginated(ctx context.Context, que
 		endIndex = len(store.contacts)
 	}
 
-	return store.contacts[startIndex:endIndex], nil
+	// If query is empty, return all contacts within the specified range
+	if query == "" {
+		return store.contacts[startIndex:endIndex], nil
+	}
+
+	// If query is not empty, filter contacts based on the query
+	var filteredContacts []domain.Contact
+	for _, contact := range store.contacts {
+		if strings.Contains(strings.ToLower(contact.FirstName+" "+contact.LastName), strings.ToLower(query)) ||
+			strings.Contains(strings.ToLower(contact.Email), strings.ToLower(query)) ||
+			strings.Contains(strings.ToLower(contact.Phone), strings.ToLower(query)) {
+			filteredContacts = append(filteredContacts, contact)
+		}
+	}
+
+	// Adjust endIndex for filtered contacts
+	if endIndex > len(filteredContacts) {
+		endIndex = len(filteredContacts)
+	}
+
+	return filteredContacts[startIndex:endIndex], nil
 }
 
 // GetTotalContacts implementation for InMemoryContactStore
