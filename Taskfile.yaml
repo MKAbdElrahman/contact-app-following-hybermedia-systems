@@ -1,9 +1,23 @@
 version: 3 
 
+env: 
+  PROTO_DST_DIR: protogen
+  PROTO_SRC_DIR: proto
+
+
 
 tasks: 
+  
+  
+  protoc-install: sudo apt install -y protobuf-compiler
+  protoc-gen-go-install: go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+  install-grpc: go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
   run:
     deps: [build]
     cmds:
       - ./bin/app
   build: templ generate && go build -o ./bin/app .
+  exp:  go run exp/main.go
+
+  protoc: protoc -I=$PROTO_SRC_DIR --go_out=$PROTO_DST_DIR $PROTO_SRC_DIR/hello.proto
+
