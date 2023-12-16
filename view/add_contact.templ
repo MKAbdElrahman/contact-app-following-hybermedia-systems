@@ -4,16 +4,38 @@ type AddContactPageData struct{}
 
 templ AddContactPageBody(c context.Context, data AddContactPageData) {
 	<div class="contacts-container">
-		<form action="/contacts/new" method="post" class="add-contact-form">
-			<label for="firstName">First Name:</label>
-			<input type="text" class="first-name" name="firstName" required/>
-			<label for="lastName">Last Name:</label>
-			<input type="text" id="lastName" name="lastName" required/>
-			<label for="phone">Phone:</label>
-			<input type="tel" id="phone" name="phone" required/>
-			<label for="email">Email:</label>
-			<input type="email" id="email" name="email" required/>
-			<button type="submit">Add Contact</button>
+		<form>
+			<fieldset>
+				<legend>Contact Values</legend>
+				<p>
+					<label for="email">Email</label>
+					<input name="email" id="email" type="text" placeholder="Email"/>
+					<span class="validation-error"></span>
+				</p>
+				<p>
+					<label for="first_name">First Name</label>
+					<input
+ 						name="firstName"
+ 						id="firstName"
+ 						type="text"
+ 						placeholder="First Name"
+					/>
+				</p>
+				<p>
+					<label for="last_name">Last Name</label>
+					<input
+ 						name="lastName"
+ 						id="lastName"
+ 						type="text"
+ 						placeholder="Last Name"
+					/>
+				</p>
+				<p>
+					<label for="phone">Phone</label>
+					<input name="phone" id="phone" type="text" placeholder="Phone"/>
+				</p>
+				@PostButton("/contacts/new" , "Save","body","firstName lastName email Phone","btn")
+			</fieldset>
 		</form>
 	</div>
 }

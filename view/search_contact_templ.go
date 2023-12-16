@@ -38,7 +38,7 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"main\"><form><label for=\"search\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><form><label for=\"search\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +47,7 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\"> <button hx-get=\"/contacts\" hx-target=\"#search-results\" hx-swap=\"outerHtml\" hx-include=\"#search\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\"> <button hx-get=\"/contacts\" hx-target=\"#search-results\" hx-swap=\"outerHtml\" hx-include=\"#search\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

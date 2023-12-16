@@ -16,13 +16,14 @@ type SearchContactsPageData struct {
 }
 
 templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
-	<div id="main">
+	<div>
 		<form>
 			<label for="search">Contacts:</label>
-			<input id="search" name="q" type="search" placeholder="Search Contacts"/>
+			<input hx-get="/contacts" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" id="search" name="q" type="search" placeholder="Search Contacts"/>
 			<button hx-get="/contacts" hx-target="#search-results" hx-swap="outerHtml" hx-include="#search">
 				Search
 			</button>
+			// @GetPageButton("/contacts","Search","#search-results","btn")
 		</form>
 		<div id="search-results"></div>
 	</div>

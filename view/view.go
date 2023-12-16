@@ -27,7 +27,7 @@ func (r *View) RenderValidationError(c echo.Context, msg string) error {
 
 func (r *View) RenderContactsPage(c echo.Context, data ContactsPageData) error {
 
-	page := Layout("Contacts", ContactsPageBody(c.Request().Context(), data))
+	page :=  ContactsPageBody(c.Request().Context(), data)
 
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }

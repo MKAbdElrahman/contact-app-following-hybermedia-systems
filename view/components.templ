@@ -1,0 +1,19 @@
+package view
+
+templ GetButton(url string, name string, target string,include string,class string) {
+	<button hx-get={ url } hx-target={ target } hx-swap="outerHtml" hx-push-url="true" hx-include={ include }>
+		{ name }
+	</button>
+}
+
+templ PostButton(url string, name string, target string,include string,class string) {
+	<button hx-post={ url } hx-target={ target } hx-swap="outerHtml" hx-push-url="true" hx-include={ include }>
+		{ name }
+	</button>
+}
+
+templ DeleteButton(name string, endpoint string) {
+	<button hx-confirm="Are you sure you want to delete this resource?" hx-target="body" hx-push-url="true" hx-delete={ endpoint }>
+		{ name }
+	</button>
+}

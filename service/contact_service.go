@@ -13,7 +13,7 @@ type ContactUpdateParams struct {
 }
 
 type ContactStore interface {
-	AddContact(ctx context.Context, contact domain.Contact) error
+	AddContact(ctx context.Context, contact domain.Contact) (int, error)
 	UpdateContact(ctx context.Context, id int, params ContactUpdateParams) error
 	DeleteContact(ctx context.Context, id int) error
 	GetContacts(ctx context.Context, query string) ([]domain.Contact, error)

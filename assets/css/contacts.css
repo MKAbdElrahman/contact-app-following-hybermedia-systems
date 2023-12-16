@@ -1,150 +1,139 @@
-/* Global variables */
-:root {
-    --black: #171321;
-    --dkblue: #0d314b;
-    --plum: #4b0d49;
-    --hotmag: #ff17e4;
-    --magenta: #e310cb;
-    --aqua: #86fbfb;
-    --white: #f7f8fa;
-    --font-size: 1.3rem;
-    --mono: "Oxygen mono", monospace;
-    --sans: Oxygen, sans-serif;
-}
+    /* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
+    :root {
+        --black: #171321;
+        --dkblue: #0d314b;
+        --plum: #4b0d49;
+        --hotmag: #ff17e4;
+        --magenta: #e310cb;
+        --aqua: #86fbfb;
+        --white: #f7f8fa;
+        --font-size: 1.3rem;
+        --mono: "Oxygen mono", monospace;
+        --sans: Oxygen, sans-serif;
+    }
 
-/* Box model */
-html {
-    box-sizing: border-box;
-}
+    /* border box model: https://css-tricks.com/box-sizing/ */
+    html {
+        box-sizing: border-box;
+    }
 
-*,
-*::before,
-*::after {
-    box-sizing: inherit;
-}
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
 
-body {
-    padding: 0;
-    margin: 1rem;
-    font-family: var(--sans);
-    background-color: var(--black);
-    color: var(--white);
-    font-size: var(--font-size);
-}
+    body {
+        padding: 0;
+        margin: 1rem;
+        font-family: var(--sans);
+        background-color: var(--black);
+        color: var(--white);
+        font-size: var(--font-size);
+    }
 
-/* Shared styles for contacts pages */
-.contacts-page-container,
-.main,
-.contacts-container {
-    margin: 2rem;
-}
 
-/* Table styles */
-.contacts-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
+    h1,
+    h2,
+    h3 {
+        margin: 0;
+    }
 
-.contacts-table th,
-.contacts-table td {
-    border: 1px solid var(--white);
-    padding: 0.5rem;
-}
+    a {
+        color: var(--magenta);
+    }
 
-.contact-id,
-.first-name,
-.last-name,
-.phone,
-.email,
-.actions,
-label {
-    text-align: left;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--aqua);
-}
+    a:hover {
+        color: var(--hotmag);
+        text-decoration: none;
+    }
 
-/* Add Contact Link */
-.add-contact-link {
-    margin-top: 1rem;
-    color: var(--aqua);
-    text-decoration: none;
-    font-weight: bold;
-}
+    nav {
+        font-family: var(--mono);
+        font-size: 80%;
+        padding: 1rem;
+    }
 
-.add-contact-link:hover {
-    color: var(--hotmag);
-}
+    nav h1 a {
+        font-family: var(--sans);
+    }
 
-/* Form styles */
-form,
-.add-contact-form {
-    margin-bottom: 1rem;
-}
 
-input {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: var(--font-size);
-    margin-bottom: 1rem;
-}
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
 
-button {
-    padding: 0.5rem 1rem;
-    font-size: var(--font-size);
-    background-color: var(--hotmag);
-    color: var(--white);
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: var(--magenta);
-}
-
-/* Search results */
-.search-results {
-    margin-top: 1rem;
-    border: 1px solid var(--white);
-    padding: 1rem;
-    color: var(--white);
-}
-
-/* Table Header styles */
-.contacts-table thead {
-    background-color: var(--dkblue);
-    color: var(--white);
-    display: flex;
-    justify-content: space-between;
-    /* Adjust the spacing between headers as needed */
-}
-
-.contacts-table th {
-    flex: 1;
-    padding: 0.75rem;
-    font-weight: bold;
-    text-align: center;
-    /* Adjust the text alignment as needed */
-}
-
-.contacts-table th:first-child {
-    border-top-left-radius: 5px;
-}
-
-.contacts-table th:last-child {
-    border-top-right-radius: 5px;
-}
+    #Footer p {
+        color: var(--white);
+        margin: 0 10px;
+        font-size: 0.5em;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
 
 
 
-.validation-error {
-    color: #ff0000;
-    /* Red text color for errors */
-    font-size: 14px;
-    /* Adjust the font size for errors */
-    margin-top: 5px;
-    /* Add some space above the error message */
-    display: block;
-    /* Ensure error messages appear on a new line */
-}
+    .btn {
+        background-color: var(--plum);
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-family: sans-serif;
+        color: var(--white);
+    }
+
+    .btn:hover {
+        background-color: var(--hotmag);
+        color: var(--white);
+    }
+
+
+
+    button {
+        background-color: var(--plum);
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-family: sans-serif;
+        color: var(--white);
+    }
+
+    button:hover {
+        background-color: var(--hotmag);
+        color: var(--white);
+    }
+
+    /* Table styles */
+    .contacts-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    .contacts-table th,
+    .contacts-table td {
+        border: 1px solid var(--white);
+        padding: 0.5rem;
+    }
+
+
+    .validation-error {
+        color: #ff0000;
+        /* Red text color for errors */
+        font-size: 14px;
+        /* Adjust the font size for errors */
+        margin-top: 5px;
+        /* Add some space above the error message */
+        display: block;
+        /* Ensure error messages appear on a new line */
+    }

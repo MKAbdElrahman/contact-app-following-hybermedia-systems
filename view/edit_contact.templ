@@ -18,15 +18,9 @@ func prepareContactDeleteEndPoint(id int) string {
 	return "/contacts/" + fmt.Sprint(id)
 }
 
-templ deleteBtn(name string, endpoint string) {
-	<button hx-confirm="Are you sure you want to delete this contact?" hx-target="body" hx-push-url="true" hx-delete={ endpoint }>
-		{ name }
-	</button>
-}
-
 templ EditContactPageBody(c context.Context, data EditContactPageData) {
 	<div id="main">
-		<form action={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } method="post">
+		<form>
 			<fieldset>
 				<legend>Contact Values</legend>
 				<p>
@@ -58,10 +52,10 @@ templ EditContactPageBody(c context.Context, data EditContactPageData) {
 					<label for="phone">Phone</label>
 					<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
 				</p>
-				<button>Save</button>
+				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit" , "Save","body","firstName lastName email Phone","btn")
 			</fieldset>
 		</form>
-		@deleteBtn("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
+		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
 		<p>
 			<a href="/contacts/">Back</a>
 		</p>

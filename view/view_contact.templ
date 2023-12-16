@@ -14,7 +14,7 @@ templ ViewContactPageBody(c context.Context, data ViewContactPageData) {
 		<div>Email: { data.Contact.Email }</div>
 	</div>
 	<p>
-		<a href={ "/contacts/" + templ.URL(fmt.Sprint(data.Contact.ID)) + "/edit" } class="action-link">Edit</a>
-		<a href="/contacts">Back</a>
+		@GetButton(fmt.Sprintf("/contacts/%d/edit",data.Contact.ID),"Edit","body","","btn")
+		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
 	</p>
 }

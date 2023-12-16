@@ -22,43 +22,48 @@ func toString(data ContactsPageData) string {
 
 templ ActionComponent(c domain.Contact) {
 	<td>
-		<a href={ "/contacts/" + templ.URL(fmt.Sprint(c.ID)) + "/edit" } class="action-link">Edit</a>
-		<a href={ "/contacts/" + templ.URL(fmt.Sprint(c.ID)) + "/view" } class="action-link">View</a>
+		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID),"Edit","body","","btn")
+		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID),"View","body","","btn")
 	</td>
+}
+
+// fmt.Sprintf("/contacts/%d/edit", c.ID)
+
+templ GetPageButton(url string, name string, target string,class string) {
+	<a class={ class } hx-get={ url } hx-push-url="true" hx-target={ target } hx-swap="outerHTML">
+		{ name }
+	</a>
 }
 
 // ContactTable is a template for rendering a contact as a table row.
 
-templ ContactTable(contact domain.Contact) {
+templ ContactTableRow(contact domain.Contact) {
 	<tr>
-		<td>{ fmt.Sprint(contact.ID) }</td>
-		<td>{ contact.FirstName }</td>
-		<td>{ contact.LastName }</td>
-		<td>{ contact.Phone }</td>
-		<td>{ contact.Email }</td>
+		<td class="contact-id">{ fmt.Sprint(contact.ID) }</td>
+		<td class="first-name">{ contact.FirstName }</td>
+		<td class="last-name">{ contact.LastName }</td>
+		<td class="phone">{ contact.Phone }</td>
+		<td class="email">{ contact.Email }</td>
 		@ActionComponent(contact)
 	</tr>
 }
 
 templ ContactsPageBody(c context.Context, data ContactsPageData) {
-	<div class="contacts-page-container">
+	<div id="main">
 		<table class="contacts-table">
 			<tbody>
 				for _, contact := range data.Contacts {
-					@ContactTable(contact)
+					@ContactTableRow(contact)
 				}
 			</tbody>
 		</table>
-		<p class="add-contact-link">
-			<a class="add-contact-link" href="/contacts/new">Add Contact</a>
-		</p>
 		<div>
 			<span style="float: center">
 				if  data.CurrentPage > 1 {
-					<a href={ templ.SafeURL(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1)) }>Previous</a>
+					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","","btn")
 				}
 				if len(data.Contacts) == 10 {
-					<a href={ templ.SafeURL(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1)) }>Next</a>
+					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","#main","","btn")
 				}
 			</span>
 		</div>

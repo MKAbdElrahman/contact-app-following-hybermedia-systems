@@ -153,7 +153,7 @@ func (h *contactHandler) HandlePostedContactEdit(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusFound, "/contacts")
+	return c.Redirect(http.StatusSeeOther, fmt.Sprintf("/contacts/%d/view", id))
 }
 
 func (h *contactHandler) HandlePostedContactDelete(c echo.Context) error {
@@ -170,7 +170,7 @@ func (h *contactHandler) HandlePostedContactDelete(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusSeeOther, "/contacts")
+	return c.Redirect(http.StatusSeeOther, "/contacts/search")
 }
 
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
@@ -182,13 +182,13 @@ func (h *contactHandler) HandlePostAddContact(c echo.Context) error {
 	contact.Email = c.FormValue("email")
 	contact.Phone = c.FormValue("phone")
 
-	err := h.contactService.ContactStore.AddContact(c.Request().Context(), contact)
+	id, err := h.contactService.ContactStore.AddContact(c.Request().Context(), contact)
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 
-	return c.Redirect(http.StatusFound, "/contacts")
+	return c.Redirect(http.StatusSeeOther, fmt.Sprintf("/contacts/%d/view", id))
 }
 
 func (h *contactHandler) HandleGetSearchContactsPage(c echo.Context) error {

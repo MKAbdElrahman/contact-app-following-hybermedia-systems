@@ -17,13 +17,13 @@ func NewInMemoryContactStore() *InMemoryContactStore {
 	}
 }
 
-var counter = 0
+var counter = 1
 
-func (store *InMemoryContactStore) AddContact(ctx context.Context, contact domain.Contact) error {
+func (store *InMemoryContactStore) AddContact(ctx context.Context, contact domain.Contact) (int, error) {
 	contact.ID = counter
 	store.contacts = append(store.contacts, contact)
 	counter++
-	return nil
+	return counter - 1, nil
 }
 
 func (store *InMemoryContactStore) GetContacts(ctx context.Context, query string) ([]domain.Contact, error) {

@@ -5,13 +5,48 @@ templ Layout(title string, body templ.Component) {
 	<html lang="en">
 		<head>
 			<title>{ title }</title>
-			<script src="/static/js/htmx.min.js"></script>
 			<script src="https://kit.fontawesome.com/e08a305d54.js" crossorigin="anonymous"></script>
 			<link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet"/>
 			<link rel="stylesheet" href="/static/css/contacts.css"/>
+			<script src="/static/js/htmx.min.js"></script>
 		</head>
-		<body hx-boost="true">
+		<body>
+			@Navbar()
 			@body
+			@Footer()
 		</body>
 	</html>
+}
+
+templ Footer() {
+	<section id="Footer">
+		<footer>
+			<div>
+				<p>&copy; 2023 Mohamed Kamal. All rights reserved.</p>
+			</div>
+		</footer>
+	</section>
+}
+
+templ search() {
+	@GetButton("/contacts/search","search", "body","" , "btn")
+}
+
+templ add() {
+	@GetButton("/contacts/new","new", "body","" , "btn")
+}
+
+templ Navbar() {
+	<section>
+		<nav>
+			<ul>
+				<li>
+					@add()
+				</li>
+				<li>
+					@search()
+				</li>
+			</ul>
+		</nav>
+	</section>
 }
