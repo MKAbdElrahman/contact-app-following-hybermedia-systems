@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -117,6 +118,17 @@ func (h *contactHandler) ValidateEmail(c echo.Context) error {
 
 func (h *contactHandler) HandleGetAddContact(c echo.Context) error {
 	return h.view.RenderAddContactPage(c, view.AddContactPageData{})
+}
+
+func (h *contactHandler) HandleGetContactsCount(c echo.Context) error {
+	total, err := h.contactService.ContactStore.GetTotalContacts(c.Request().Context(), "")
+
+	if err != nil {
+		return err
+	}
+	time.Sleep(3 * time.Second)
+
+	return c.String(http.StatusOK, fmt.Sprintf(("%d "), total))
 }
 
 func (h *contactHandler) HandleGetEditPage(c echo.Context) error {

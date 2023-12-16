@@ -49,6 +49,7 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 
 	e.GET("/", indexPageHandler.HandleGetIndexPage)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
+	e.GET("/contacts/count", contactHandler.HandleGetContactsCount)
 
 	e.GET("/contacts/search", contactHandler.HandleGetSearchContactsPage)
 	e.POST("/contacts/search", contactHandler.HandlePostSearchContactsPage)

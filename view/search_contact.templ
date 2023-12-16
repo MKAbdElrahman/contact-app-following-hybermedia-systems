@@ -15,9 +15,14 @@ type SearchContactsPageData struct {
 	Query string
 }
 
+templ ContactsCount() {
+	<span hx-get="/contacts/count" hx-trigger="load"></span>
+}
+
 templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
 	<div>
 		<form>
+			@ContactsCount()
 			<label for="search">Contacts:</label>
 			<input hx-get="/contacts" hx-indicator="#spinner" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" hx-push-url="true" id="search" name="q" type="search" placeholder="Search Contacts"/>
 			<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Request In Flight..."/>
