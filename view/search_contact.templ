@@ -19,7 +19,7 @@ templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
 	<div>
 		<form>
 			<label for="search">Contacts:</label>
-			<input hx-get="/contacts" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" id="search" name="q" type="search" placeholder="Search Contacts"/>
+			<input hx-get="/contacts" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" hx-push-url="true" id="search" name="q" type="search" placeholder="Search Contacts"/>
 			@GetButton("/contacts", "Search", "#search-results","#search")
 		</form>
 		<div id="search-results"></div>
