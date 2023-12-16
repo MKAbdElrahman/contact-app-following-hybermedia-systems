@@ -130,7 +130,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PostButton("/contacts/"+fmt.Sprint(data.Contact.ID)+"/edit", "Save", "body", "firstName lastName email Phone", "btn").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PostButton("/contacts/"+fmt.Sprint(data.Contact.ID)+"/edit", "Save", "body", "firstName lastName email Phone").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -142,16 +142,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p><a href=\"/contacts/\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var7 := `Back`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></p></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -22,18 +22,10 @@ templ Footer() {
 	<section id="Footer">
 		<footer>
 			<div>
-				<p>&copy; 2023 Mohamed Kamal. All rights reserved.</p>
+				<p>&copy; 2023 MK. All rights reserved.</p>
 			</div>
 		</footer>
 	</section>
-}
-
-templ search() {
-	@GetButton("/contacts/search","search", "body","" , "btn")
-}
-
-templ add() {
-	@GetButton("/contacts/new","new", "body","" , "btn")
 }
 
 templ Navbar() {
@@ -41,12 +33,20 @@ templ Navbar() {
 		<nav>
 			<ul>
 				<li>
-					@add()
+					@navbarSearchButton()
 				</li>
 				<li>
-					@search()
+					@navbarNewContactButton()
 				</li>
 			</ul>
 		</nav>
 	</section>
+}
+
+templ navbarSearchButton() {
+	@GetButton("/contacts/search", "Search", "body","")
+}
+
+templ navbarNewContactButton() {
+	@GetButton("/contacts/new", "New", "body","")
 }

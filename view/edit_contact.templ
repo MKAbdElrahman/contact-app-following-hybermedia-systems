@@ -52,12 +52,9 @@ templ EditContactPageBody(c context.Context, data EditContactPageData) {
 					<label for="phone">Phone</label>
 					<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
 				</p>
-				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit" , "Save","body","firstName lastName email Phone","btn")
+				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit" , "Save","body","firstName lastName email Phone")
 			</fieldset>
 		</form>
 		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
-		<p>
-			<a href="/contacts/">Back</a>
-		</p>
 	</div>
 }

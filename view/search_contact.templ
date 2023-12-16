@@ -20,10 +20,7 @@ templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
 		<form>
 			<label for="search">Contacts:</label>
 			<input hx-get="/contacts" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" id="search" name="q" type="search" placeholder="Search Contacts"/>
-			<button hx-get="/contacts" hx-target="#search-results" hx-swap="outerHtml" hx-include="#search">
-				Search
-			</button>
-			// @GetPageButton("/contacts","Search","#search-results","btn")
+			@GetButton("/contacts", "Search", "#search-results","#search")
 		</form>
 		<div id="search-results"></div>
 	</div>

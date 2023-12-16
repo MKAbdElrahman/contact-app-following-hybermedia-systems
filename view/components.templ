@@ -1,12 +1,16 @@
 package view
 
-templ GetButton(url string, name string, target string,include string,class string) {
+// issue get requests - include will append queries to the url
+
+templ GetButton(url string, name string, target string,include string) {
 	<button hx-get={ url } hx-target={ target } hx-swap="outerHtml" hx-push-url="true" hx-include={ include }>
 		{ name }
 	</button>
 }
 
-templ PostButton(url string, name string, target string,include string,class string) {
+// issue post requests - include will append queries to the body
+
+templ PostButton(url string, name string, target string,include string) {
 	<button hx-post={ url } hx-target={ target } hx-swap="outerHtml" hx-push-url="true" hx-include={ include }>
 		{ name }
 	</button>
@@ -16,4 +20,8 @@ templ DeleteButton(name string, endpoint string) {
 	<button hx-confirm="Are you sure you want to delete this resource?" hx-target="body" hx-push-url="true" hx-delete={ endpoint }>
 		{ name }
 	</button>
+}
+
+templ InputWithActiveSearch(url string, target string) {
+	<input hx-get={ url } hx-target={ target } hx-trigger="search, keyup delay:200ms changed" id="search" name="q" type="search" placeholder="Search"/>
 }

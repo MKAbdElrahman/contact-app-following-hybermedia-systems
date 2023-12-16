@@ -47,11 +47,11 @@ func ActionComponent(c domain.Contact) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID), "Edit", "body", "", "btn").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID), "Edit", "body", "").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts/%d/view", c.ID), "View", "body", "", "btn").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts/%d/view", c.ID), "View", "body", "").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -237,13 +237,13 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 			return templ_7745c5c3_Err
 		}
 		if data.CurrentPage > 1 {
-			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1), "Previous", "#main", "", "btn").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1), "Previous", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
 		if len(data.Contacts) == 10 {
-			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1), "Next", "#main", "", "btn").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1), "Next", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

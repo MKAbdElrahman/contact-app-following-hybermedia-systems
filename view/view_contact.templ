@@ -14,7 +14,7 @@ templ ViewContactPageBody(c context.Context, data ViewContactPageData) {
 		<div>Email: { data.Contact.Email }</div>
 	</div>
 	<p>
-		@GetButton(fmt.Sprintf("/contacts/%d/edit",data.Contact.ID),"Edit","body","","btn")
+		@GetButton(fmt.Sprintf("/contacts/%d/edit",data.Contact.ID),"Edit","body","")
 		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
 	</p>
 }

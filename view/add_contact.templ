@@ -34,7 +34,7 @@ templ AddContactPageBody(c context.Context, data AddContactPageData) {
 					<label for="phone">Phone</label>
 					<input name="phone" id="phone" type="text" placeholder="Phone"/>
 				</p>
-				@PostButton("/contacts/new" , "Save","body","firstName lastName email Phone","btn")
+				@PostButton("/contacts/new" , "Save","body","firstName lastName email Phone")
 			</fieldset>
 		</form>
 	</div>

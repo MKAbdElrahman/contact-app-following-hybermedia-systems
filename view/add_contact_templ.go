@@ -74,7 +74,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PostButton("/contacts/new", "Save", "body", "firstName lastName email Phone", "btn").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PostButton("/contacts/new", "Save", "body", "firstName lastName email Phone").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

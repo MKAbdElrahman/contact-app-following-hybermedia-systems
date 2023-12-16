@@ -47,16 +47,15 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\"> <button hx-get=\"/contacts\" hx-target=\"#search-results\" hx-swap=\"outerHtml\" hx-include=\"#search\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var3 := `Search`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
+		templ_7745c5c3_Err = GetButton("/contacts", "Search", "#search-results", "#search").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></form><div id=\"search-results\"></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</form><div id=\"search-results\"></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

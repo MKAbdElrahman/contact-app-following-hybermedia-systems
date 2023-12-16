@@ -22,8 +22,8 @@ func toString(data ContactsPageData) string {
 
 templ ActionComponent(c domain.Contact) {
 	<td>
-		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID),"Edit","body","","btn")
-		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID),"View","body","","btn")
+		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID),"Edit","body","")
+		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID),"View","body","")
 	</td>
 }
 
@@ -60,10 +60,10 @@ templ ContactsPageBody(c context.Context, data ContactsPageData) {
 		<div>
 			<span style="float: center">
 				if  data.CurrentPage > 1 {
-					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","","btn")
+					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","")
 				}
 				if len(data.Contacts) == 10 {
-					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","#main","","btn")
+					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","#main","")
 				}
 			</span>
 		</div>
