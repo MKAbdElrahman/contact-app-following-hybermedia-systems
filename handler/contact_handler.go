@@ -50,9 +50,8 @@ func (h *contactHandler) HandleGetContacts(c echo.Context) error {
 	totalPages := (totalContacts + pageSize - 1) / pageSize
 
 	// Render the contacts page with pagination information
-	if c.Request().Header.Get("HX-Trigger") != "" {
+	if c.Request().Header.Get("HX-Target") == "search-results" {
 
-		fmt.Println(c.Request().Header.Get("HX-Trigger"))
 		return h.view.RenderContactsPageWithoutLayout(c, view.ContactsPageData{
 			Contacts:    data,
 			Query:       query,
