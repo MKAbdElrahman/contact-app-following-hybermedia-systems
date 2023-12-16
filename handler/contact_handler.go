@@ -29,6 +29,7 @@ func (h *contactHandler) HandleGetContacts(c echo.Context) error {
 	const pageSize = 10 // Number of contacts per page
 
 	// Retrieve the query parameter and current page from the request
+
 	query := c.QueryParam("q")
 	page, err := strconv.Atoi(c.QueryParam("page"))
 	if err != nil || page < 1 {
@@ -49,12 +50,23 @@ func (h *contactHandler) HandleGetContacts(c echo.Context) error {
 	totalPages := (totalContacts + pageSize - 1) / pageSize
 
 	// Render the contacts page with pagination information
-	return h.view.RenderContactsPage(c, view.ContactsPageData{
-		Contacts:    data,
-		Query:       query,
-		CurrentPage: page,
-		TotalPages:  totalPages,
-	})
+	if c.Request().Header.Get("HX-Trigger") != "" {
+
+		fmt.Println(c.Request().Header.Get("HX-Trigger"))
+		return h.view.RenderContactsPageWithoutLayout(c, view.ContactsPageData{
+			Contacts:    data,
+			Query:       query,
+			CurrentPage: page,
+			TotalPages:  totalPages,
+		})
+	} else {
+		return h.view.RenderContactsPage(c, view.ContactsPageData{
+			Contacts:    data,
+			Query:       query,
+			CurrentPage: page,
+			TotalPages:  totalPages,
+		})
+	}
 }
 
 func (h *contactHandler) HandleGetContactByID(c echo.Context) error {

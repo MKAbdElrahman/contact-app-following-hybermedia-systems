@@ -25,10 +25,16 @@ func (r *View) RenderValidationError(c echo.Context, msg string) error {
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }
 
+func (r *View) RenderContactsPageWithoutLayout(c echo.Context, data ContactsPageData) error {
+
+	page := ContactsPageBody(c.Request().Context(), data, true)
+
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
 func (r *View) RenderContactsPage(c echo.Context, data ContactsPageData) error {
 
-	page :=  ContactsPageBody(c.Request().Context(), data)
-
+	page := Layout("Contact", ContactsPageBody(c.Request().Context(), data, false))
 	return page.Render(c.Request().Context(), c.Response().Writer)
 }
 

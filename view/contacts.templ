@@ -48,7 +48,7 @@ templ ContactTableRow(contact domain.Contact) {
 	</tr>
 }
 
-templ ContactsPageBody(c context.Context, data ContactsPageData) {
+templ ContactsPageBody(c context.Context, data ContactsPageData , isRaw bool) {
 	<div id="main">
 		<table class="contacts-table">
 			<tbody>
@@ -59,11 +59,20 @@ templ ContactsPageBody(c context.Context, data ContactsPageData) {
 		</table>
 		<div>
 			<span style="float: center">
-				if  data.CurrentPage > 1 {
-					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","")
-				}
-				if len(data.Contacts) == 10 {
-					@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","#main","")
+				if isRaw {
+					if  data.CurrentPage > 1 {
+						@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","")
+					}
+					if len(data.Contacts) == 10 {
+						@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","#main","")
+					}
+				} else {
+					if  data.CurrentPage > 1 {
+						@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","body","")
+					}
+					if len(data.Contacts) == 10 {
+						@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1),"Next","body","")
+					}
 				}
 			</span>
 		</div>

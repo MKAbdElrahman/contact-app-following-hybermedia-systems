@@ -35,7 +35,7 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format:           "time=${time_custom}, method=${method}, uri=${uri}, status=${status}, latency=${latency_human}\n",
-		CustomTimeFormat: "15:04",
+		CustomTimeFormat: "15:04:05",
 	}))
 
 	view := view.NewView()

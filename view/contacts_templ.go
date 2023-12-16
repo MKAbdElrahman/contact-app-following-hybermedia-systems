@@ -209,7 +209,7 @@ func ContactTableRow(contact domain.Contact) templ.Component {
 	})
 }
 
-func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component {
+func ContactsPageBody(c context.Context, data ContactsPageData, isRaw bool) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -236,16 +236,39 @@ func ContactsPageBody(c context.Context, data ContactsPageData) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if data.CurrentPage > 1 {
-			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1), "Previous", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
+		if isRaw {
+			if data.CurrentPage > 1 {
+				templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1), "Previous", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-		}
-		if len(data.Contacts) == 10 {
-			templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1), "Next", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
+			if len(data.Contacts) == 10 {
+				templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1), "Next", "#main", "").Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+		} else {
+			if data.CurrentPage > 1 {
+				templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1), "Previous", "body", "").Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
+			}
+			if len(data.Contacts) == 10 {
+				templ_7745c5c3_Err = GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage+1), "Next", "body", "").Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 			}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div>")
