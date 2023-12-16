@@ -47,7 +47,7 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" hx-push-url=\"true\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-indicator=\"#spinner\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" hx-push-url=\"true\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\"> <img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\" alt=\"Request In Flight...\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

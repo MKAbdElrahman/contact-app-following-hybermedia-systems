@@ -19,7 +19,8 @@ templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
 	<div>
 		<form>
 			<label for="search">Contacts:</label>
-			<input hx-get="/contacts" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" hx-push-url="true" id="search" name="q" type="search" placeholder="Search Contacts"/>
+			<input hx-get="/contacts" hx-indicator="#spinner" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" hx-push-url="true" id="search" name="q" type="search" placeholder="Search Contacts"/>
+			<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Request In Flight..."/>
 			@GetButton("/contacts", "Search", "#search-results","#search")
 		</form>
 		<div id="search-results"></div>
