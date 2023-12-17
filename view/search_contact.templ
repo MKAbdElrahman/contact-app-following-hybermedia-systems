@@ -16,7 +16,7 @@ type SearchContactsPageData struct {
 }
 
 templ ContactsCount() {
-	<span hx-get="/contacts/count" hx-trigger="load">
+	<span hx-get="/contacts/count" hx-trigger="revealed">
 		<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
 	</span>
 }

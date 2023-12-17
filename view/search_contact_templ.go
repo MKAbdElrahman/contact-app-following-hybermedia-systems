@@ -38,7 +38,7 @@ func ContactsCount() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span hx-get=\"/contacts/count\" hx-trigger=\"load\"><img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\"></span>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span hx-get=\"/contacts/count\" hx-trigger=\"revealed\"><img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\"></span>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
