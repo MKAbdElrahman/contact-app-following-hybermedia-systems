@@ -16,8 +16,14 @@ templ PostButton(url string, name string, target string,include string) {
 	</button>
 }
 
-templ DeleteButton(name string, endpoint string) {
-	<button hx-confirm="Are you sure you want to delete this resource?" hx-target="body" hx-push-url="true" hx-delete={ endpoint }>
+templ DeleteButton(name string, endpoint string, target string) {
+	<button hx-confirm="Are you sure you want to delete this resource?" hx-target={ target } hx-push-url="true" hx-delete={ endpoint }>
+		{ name }
+	</button>
+}
+
+templ InlineDeleteButton(name string, endpoint string, target string) {
+	<button hx-confirm="Are you sure you want to delete this resource?" hx-target={ target } hx-push-url="false" hx-delete={ endpoint }>
 		{ name }
 	</button>
 }

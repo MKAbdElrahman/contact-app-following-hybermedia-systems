@@ -40,14 +40,13 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 
 	view := view.NewView()
 
-	indexPageHandler := IndexPageHandler{}
 	contactHandler := NewContactHandler(services.ContactService, view)
 
 	e.Static("/static", "assets")
 
 	e.HTTPErrorHandler = CustomHTTPErrorHandler
 
-	e.GET("/", indexPageHandler.HandleGetIndexPage)
+	e.GET("/", contactHandler.HandleGetSearchContactsPage)
 	e.GET("/contacts", contactHandler.HandleGetContacts)
 	e.GET("/contacts/count", contactHandler.HandleGetContactsCount)
 

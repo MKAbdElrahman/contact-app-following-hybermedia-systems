@@ -84,7 +84,7 @@ func ViewContactPageBody(c context.Context, data ViewContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID)).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID), "body").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

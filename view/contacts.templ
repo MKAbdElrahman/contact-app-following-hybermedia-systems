@@ -24,6 +24,7 @@ templ ActionComponent(c domain.Contact) {
 	<td>
 		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID),"Edit","body","")
 		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID),"View","body","")
+		@InlineDeleteButton("Delete", prepareContactDeleteEndPoint(c.ID),"closest tr")
 	</td>
 }
 

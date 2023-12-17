@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -126,7 +127,7 @@ func (h *contactHandler) HandleGetContactsCount(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(500 * time.Millisecond)
 
 	return c.String(http.StatusOK, fmt.Sprintf(("%d "), total))
 }
@@ -193,7 +194,21 @@ func (h *contactHandler) HandlePostedContactDelete(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusSeeOther, "/contacts/search")
+	// fmt.Println("Trigger id:", c.Request().Header.Get("HX-Trigger"))
+	// fmt.Println("Trigger name:", c.Request().Header.Get("HX-Trigger-Name"))
+	// fmt.Println("Target:", c.Request().Header.Get("HX-Trigger-Name"))
+	currentURL := c.Request().Header.Get("HX-Current-URL")
+
+	fmt.Println(currentURL)
+
+	// http://localhost:3000/contacts/1/view
+	matchedViewPage, _ := regexp.MatchString("/contacts/\\d+/view", currentURL)
+	if matchedViewPage {
+		return c.Redirect(http.StatusSeeOther, "/contacts")
+	}
+
+	return c.String(http.StatusOK, "")
+
 }
 
 func (h *contactHandler) HandlePostAddContact(c echo.Context) error {

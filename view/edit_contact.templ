@@ -55,6 +55,6 @@ templ EditContactPageBody(c context.Context, data EditContactPageData) {
 				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit" , "Save","body","firstName lastName email Phone")
 			</fieldset>
 		</form>
-		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID))
+		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID),"body")
 	</div>
 }
