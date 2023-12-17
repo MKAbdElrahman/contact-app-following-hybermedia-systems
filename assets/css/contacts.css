@@ -1,145 +1,141 @@
-    /* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
-    :root {
-        --black: #171321;
-        --dkblue: #0d314b;
-        --plum: #4b0d49;
-        --hotmag: #ff17e4;
-        --magenta: #e310cb;
-        --aqua: #86fbfb;
-        --white: #f7f8fa;
-        --font-size: 1.3rem;
-        --mono: "Oxygen mono", monospace;
-        --sans: Oxygen, sans-serif;
-    }
+/* Updated color theme */
+:root {
+    --primary-bg: #1a1a1a;
+    /* Dark background color */
+    --secondary-bg: #2d2d2d;
+    /* Slightly lighter background color */
+    --accent: #3498db;
+    /* Accent color */
+    --highlight: #e74c3c;
+    /* Highlight color */
+    --text: #ecf0f1;
+    /* Text color */
+    --font-size: 1.3rem;
+    --mono: "Oxygen mono", monospace;
+    --sans: Oxygen, sans-serif;
+}
 
-    /* border box model: https://css-tricks.com/box-sizing/ */
-    html {
-        box-sizing: border-box;
-    }
+/* Global styles */
+html {
+    box-sizing: border-box;
+}
 
-    *,
-    *::before,
-    *::after {
-        box-sizing: inherit;
-    }
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
 
-    body {
-        padding: 0;
-        margin: 1rem;
-        font-family: var(--sans);
-        background-color: var(--black);
-        color: var(--white);
-        font-size: var(--font-size);
-    }
+body {
+    padding: 0;
+    margin: 1rem;
+    font-family: var(--sans);
+    background-color: var(--primary-bg);
+    color: var(--text);
+    font-size: var(--font-size);
+    transition: background-color 0.3s ease;
+}
 
+h1,
+h2,
+h3 {
+    margin: 0;
+    color: var(--accent);
+}
 
-    h1,
-    h2,
-    h3 {
-        margin: 0;
-    }
+a {
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
 
-    a {
-        color: var(--magenta);
-    }
+a:hover {
+    color: var(--highlight);
+    text-decoration: none;
+}
 
-    a:hover {
-        color: var(--hotmag);
-        text-decoration: none;
-    }
+/* Navigation styles */
+nav {
+    font-family: var(--mono);
+    font-size: 80%;
+    padding: 1rem;
+}
 
-    nav {
-        font-family: var(--mono);
-        font-size: 80%;
-        padding: 1rem;
-    }
+nav h1 a {
+    font-family: var(--sans);
+}
 
-    nav h1 a {
-        font-family: var(--sans);
-    }
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
 
+/* Footer styles */
+#Footer p {
+    color: var(--text);
+    margin: 0 10px;
+    font-size: 0.5em;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
 
-    nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-    }
+/* Button styles */
+.btn,
+button {
+    background-color: var(--accent);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    /* Bold the text */
+    color: var(--text);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    #Footer p {
-        color: var(--white);
-        margin: 0 10px;
-        font-size: 0.5em;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-    }
+.btn:hover,
+button:hover {
+    background-color: var(--highlight);
+    color: var(--text);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
+/* Table styles */
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
 
+.contacts-table th,
+.contacts-table td {
+    border: 1px solid var(--text);
+    padding: 1rem;
+    text-align: center;
+    /* Center-align content */
+}
 
-    .btn {
-        background-color: var(--plum);
-        padding: 0.5rem;
-        border-radius: 5px;
-        font-family: sans-serif;
-        color: var(--white);
-    }
+/* Validation error styles */
+.validation-error {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
 
-    .btn:hover {
-        background-color: var(--hotmag);
-        color: var(--white);
-    }
-
-
-
-    button {
-        background-color: var(--plum);
-        padding: 0.5rem;
-        border-radius: 5px;
-        font-family: sans-serif;
-        color: var(--white);
-    }
-
-    button:hover {
-        background-color: var(--hotmag);
-        color: var(--white);
-    }
-
-    /* Table styles */
-    .contacts-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-
-    .contacts-table th,
-    .contacts-table td {
-        border: 1px solid var(--white);
-        padding: 0.5rem;
-    }
-
-
-    .validation-error {
-        color: #ff0000;
-        /* Red text color for errors */
-        font-size: 14px;
-        /* Adjust the font size for errors */
-        margin-top: 5px;
-        /* Add some space above the error message */
-        display: block;
-        /* Ensure error messages appear on a new line */
-    }
-
-
-    tr.htmx-swapping {
-        opacity: 0;
-        transition: opacity 1s ease-out;
-    }
+/* htmx swapping effect styles */
+tr.htmx-swapping {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
