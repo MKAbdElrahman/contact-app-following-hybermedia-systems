@@ -16,7 +16,9 @@ type SearchContactsPageData struct {
 }
 
 templ ContactsCount() {
-	<span hx-get="/contacts/count" hx-trigger="load"></span>
+	<span hx-get="/contacts/count" hx-trigger="load">
+		<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+	</span>
 }
 
 templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
