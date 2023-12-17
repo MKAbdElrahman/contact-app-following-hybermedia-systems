@@ -1,15 +1,13 @@
-/* Updated color theme */
+/* Dark Vim-inspired Zen mode theme */
 :root {
-    --primary-bg: #1a1a1a;
-    /* Dark background color */
-    --secondary-bg: #2d2d2d;
-    /* Slightly lighter background color */
-    --accent: #3498db;
-    /* Accent color */
-    --highlight: #e74c3c;
-    /* Highlight color */
-    --text: #ecf0f1;
-    /* Text color */
+    --background: #292929;
+    /* Darker background color */
+    --foreground: #ffffff;
+    /* White text color */
+    --accent: #ff6e6e;
+    /* Vibrant red accent color */
+    --highlight: #66c2ff;
+    /* Vibrant blue highlight color */
     --font-size: 1.3rem;
     --mono: "Oxygen mono", monospace;
     --sans: Oxygen, sans-serif;
@@ -28,11 +26,13 @@ html {
 
 body {
     padding: 0;
-    margin: 1rem;
+    margin: 0;
     font-family: var(--sans);
-    background-color: var(--primary-bg);
-    color: var(--text);
+    background-color: var(--background);
+    color: var(--foreground);
     font-size: var(--font-size);
+    margin-left: 10%;
+    margin-right: 10%;
     transition: background-color 0.3s ease;
 }
 
@@ -77,7 +77,7 @@ nav ul {
 
 /* Footer styles */
 #Footer p {
-    color: var(--text);
+    color: var(--foreground);
     margin: 0 10px;
     font-size: 0.5em;
     padding: 0;
@@ -98,8 +98,7 @@ button {
     border-radius: 5px;
     font-family: sans-serif;
     font-weight: bold;
-    /* Bold the text */
-    color: var(--text);
+    color: var(--background);
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -107,7 +106,7 @@ button {
 .btn:hover,
 button:hover {
     background-color: var(--highlight);
-    color: var(--text);
+    color: var(--background);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -120,10 +119,9 @@ button:hover {
 
 .contacts-table th,
 .contacts-table td {
-    border: 1px solid var(--text);
+    border: 1px solid var(--foreground);
     padding: 1rem;
     text-align: center;
-    /* Center-align content */
 }
 
 /* Validation error styles */

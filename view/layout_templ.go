@@ -163,7 +163,7 @@ func navbarSearchButton() templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = GetButton("/contacts/search", "Search", "body", "").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = GetButton("/", "home", "body", "").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -187,7 +187,7 @@ func navbarNewContactButton() templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = GetButton("/contacts/new", "New", "body", "").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = GetButton("/contacts/new", "new", "body", "").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
