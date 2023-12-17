@@ -137,3 +137,9 @@
         display: block;
         /* Ensure error messages appear on a new line */
     }
+
+
+    tr.htmx-swapping {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
