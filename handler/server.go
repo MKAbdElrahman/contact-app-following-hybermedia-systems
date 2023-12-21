@@ -3,7 +3,6 @@ package handler
 import (
 	"app/service"
 	"app/view"
-	"app/view/blog"
 	"context"
 	"time"
 
@@ -64,10 +63,5 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
 
-	myBlog := blog.NewBlog()
-	blogHandler := NewBlogHandler(myBlog)
-
-	e.GET("/blog", blogHandler.HandleGetIndexPage)
-	e.GET("/blog/contact", blogHandler.HandleGetContactPage)
 	return e
 }
