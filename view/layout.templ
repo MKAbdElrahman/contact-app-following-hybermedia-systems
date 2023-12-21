@@ -7,10 +7,11 @@ templ Layout(title string, body templ.Component) {
 			<title>{ title }</title>
 			<script src="https://kit.fontawesome.com/e08a305d54.js" crossorigin="anonymous"></script>
 			<link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet"/>
-			<link rel="stylesheet" href="/static/css/contacts.css"/>
+			// <link rel="stylesheet" href="/static/css/contacts.css"/>
+			<script src="https://cdn.tailwindcss.com"></script>
 			<script src="/static/js/htmx.min.js"></script>
 		</head>
-		<body>
+		<body class="font-sans bg-gray-100 min-h-screen flex flex-col">
 			@Navbar()
 			@body
 			@Footer()
@@ -19,19 +20,22 @@ templ Layout(title string, body templ.Component) {
 }
 
 templ Footer() {
-	<section id="Footer">
-		<footer>
-			<div>
-				<p>&copy; 2023 MK. All rights reserved.</p>
+	<section id="Footer" class="bg-gray-800 text-white py-4 mt-auto">
+		<footer class="max-w-4xl mx-auto flex items-center justify-center">
+			<div class="text-center">
+				<p class="text-sm">&copy; 2023 MK. All rights reserved.</p>
 			</div>
 		</footer>
 	</section>
 }
 
 templ Navbar() {
-	<section>
-		<nav>
-			<ul>
+	<section class="bg-blue-500 p-4">
+		<nav class="container mx-auto flex justify-between items-center">
+			<div>
+				<a href="/" class="text-white font-bold text-lg">Contact App</a>
+			</div>
+			<ul class="flex space-x-4">
 				<li>
 					@navbarSearchButton()
 				</li>

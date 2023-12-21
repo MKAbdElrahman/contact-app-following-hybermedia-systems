@@ -25,7 +25,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"contacts-container\"><form><fieldset><legend>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"max-w-lg mx-auto mt-8\"><form><fieldset class=\"border p-4 rounded shadow\"><legend class=\"text-lg font-semibold mb-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -34,7 +34,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</legend><p><label for=\"email\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</legend><p class=\"mb-4\"><label for=\"email\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -43,7 +43,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"email\" id=\"email\" type=\"text\" placeholder=\"Email\"> <span class=\"validation-error\"></span></p><p><label for=\"first_name\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"email\" id=\"email\" type=\"text\" placeholder=\"Email\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"> <span class=\"validation-error text-red-500\"></span></p><p class=\"mb-4\"><label for=\"first_name\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -52,7 +52,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"firstName\" id=\"firstName\" type=\"text\" placeholder=\"First Name\"></p><p><label for=\"last_name\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"firstName\" id=\"firstName\" type=\"text\" placeholder=\"First Name\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p><p class=\"mb-4\"><label for=\"last_name\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -61,7 +61,7 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"lastName\" id=\"lastName\" type=\"text\" placeholder=\"Last Name\"></p><p><label for=\"phone\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"lastName\" id=\"lastName\" type=\"text\" placeholder=\"Last Name\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p><p class=\"mb-4\"><label for=\"phone\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -70,11 +70,11 @@ func AddContactPageBody(c context.Context, data AddContactPageData) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"phone\" id=\"phone\" type=\"text\" placeholder=\"Phone\"></p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input name=\"phone\" id=\"phone\" type=\"text\" placeholder=\"Phone\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PostButton("/contacts/new", "Save", "body", "firstName lastName email Phone").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PostButton("/contacts/new", "Save", "body", "firstName lastName email phone").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

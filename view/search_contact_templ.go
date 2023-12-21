@@ -38,7 +38,7 @@ func ContactsCount() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span hx-get=\"/contacts/count\" hx-trigger=\"revealed\"><img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\"></span>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span hx-get=\"/contacts/count\" hx-trigger=\"revealed\" class=\"inline-block\"><img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\" alt=\"Loading...\"></span>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -62,24 +62,43 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"max-w-lg mx-auto mt-8\"><form class=\"mb-4 flex flex-col md:flex-row items-start md:items-center\"><!--")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ContactsCount().Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label for=\"search\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var3 := `Contacts:`
+		templ_7745c5c3_Var3 := ` Label for the search input `
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label> <input hx-get=\"/contacts\" hx-indicator=\"#spinner\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" hx-push-url=\"true\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\"> <img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\" alt=\"Request In Flight...\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("--><label for=\"search\" class=\"block text-sm font-medium text-gray-600 mb-1 md:mb-0 md:mr-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var4 := `Contacts:`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><!--")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var5 := ` Contacts count with spinner indicator `
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("--><span hx-get=\"/contacts/count\" hx-trigger=\"revealed\" class=\"inline-block\"><img id=\"spinner\" class=\"htmx-indicator\" src=\"/static/img/spinning-circles.svg\" alt=\"Loading...\"></span><!--")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var6 := ` Search input and button container `
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("--><div class=\"flex items-center mt-2 md:mt-0\"><input hx-get=\"/contacts\" hx-indicator=\"#spinner\" hx-target=\"#search-results\" hx-trigger=\"search, keyup delay:200ms changed\" hx-push-url=\"true\" id=\"search\" name=\"q\" type=\"search\" placeholder=\"Search Contacts\" class=\"flex-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -87,7 +106,7 @@ func SearchContactsPageBody(c context.Context, data SearchContactsPageData) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</form><div id=\"search-results\"></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<img id=\"spinner\" class=\"htmx-indicator ml-2\" src=\"/static/img/spinning-circles.svg\" alt=\"Request In Flight...\"></div></form><div id=\"search-results\"></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

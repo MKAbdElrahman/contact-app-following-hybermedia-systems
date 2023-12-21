@@ -16,19 +16,37 @@ type SearchContactsPageData struct {
 }
 
 templ ContactsCount() {
-	<span hx-get="/contacts/count" hx-trigger="revealed">
-		<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+	<span hx-get="/contacts/count" hx-trigger="revealed" class="inline-block">
+		<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Loading..."/>
 	</span>
 }
 
 templ SearchContactsPageBody(c context.Context, data SearchContactsPageData) {
-	<div>
-		<form>
-			@ContactsCount()
-			<label for="search">Contacts:</label>
-			<input hx-get="/contacts" hx-indicator="#spinner" hx-target="#search-results" hx-trigger="search, keyup delay:200ms changed" hx-push-url="true" id="search" name="q" type="search" placeholder="Search Contacts"/>
-			<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Request In Flight..."/>
-			@GetButton("/contacts", "Search", "#search-results","#search")
+	<div class="max-w-lg mx-auto mt-8">
+		<form class="mb-4 flex flex-col md:flex-row items-start md:items-center">
+			<!-- Label for the search input -->
+			<label for="search" class="block text-sm font-medium text-gray-600 mb-1 md:mb-0 md:mr-4">Contacts:</label>
+			<!-- Contacts count with spinner indicator -->
+			<span hx-get="/contacts/count" hx-trigger="revealed" class="inline-block">
+				<img id="spinner" class="htmx-indicator" src="/static/img/spinning-circles.svg" alt="Loading..."/>
+			</span>
+			<!-- Search input and button container -->
+			<div class="flex items-center mt-2 md:mt-0">
+				<input
+ 					hx-get="/contacts"
+ 					hx-indicator="#spinner"
+ 					hx-target="#search-results"
+ 					hx-trigger="search, keyup delay:200ms changed"
+ 					hx-push-url="true"
+ 					id="search"
+ 					name="q"
+ 					type="search"
+ 					placeholder="Search Contacts"
+ 					class="flex-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
+				/>
+				@GetButton("/contacts", "Search", "#search-results", "#search")
+				<img id="spinner" class="htmx-indicator ml-2" src="/static/img/spinning-circles.svg" alt="Request In Flight..."/>
+			</div>
 		</form>
 		<div id="search-results"></div>
 	</div>

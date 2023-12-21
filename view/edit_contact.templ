@@ -8,53 +8,39 @@ type EditContactPageData struct {
 	Errors  map[string]string
 }
 
-// templ deleteBtn() {
-// 	<button hx-target="body" hx-push-url="true" hx-delete={ "/contacts/" + fmt.Sprint(templ.URL(fmt.Sprint(data.Contact.ID))) }>
-// 		Delete Contact
-// 	</button>
-// }
-
 func prepareContactDeleteEndPoint(id int) string {
 	return "/contacts/" + fmt.Sprint(id)
 }
 
 templ EditContactPageBody(c context.Context, data EditContactPageData) {
-	<div id="main">
+	<div id="main" class="max-w-lg mx-auto mt-8">
 		<form>
-			<fieldset>
-				<legend>Contact Values</legend>
-				<p>
-					<label for="email">Email</label>
-					<input hx-trigger="change, keyup delay:200ms changed" hx-get={ fmt.Sprintf("/contacts/%d/email", data.Contact.ID) } hx-target="next .validation-error" name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email }/>
-					<span class="validation-error"></span>
+			<fieldset class="border p-4 rounded shadow">
+				<legend class="text-lg font-semibold mb-4">Contact Values</legend>
+				<p class="mb-4">
+					<label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+					<input hx-trigger="change, keyup delay:200ms changed" hx-get={ fmt.Sprintf("/contacts/%d/email", data.Contact.ID) } hx-target="next .validation-error" name="email" id="email" type="text" placeholder="Email" value={ data.Contact.Email } class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
+					<span class="validation-error text-red-500"></span>
 				</p>
-				<p>
-					<label for="first_name">First Name</label>
-					<input
- 						name="firstName"
- 						id="firstName"
- 						type="text"
- 						placeholder="First Name"
- 						value={ data.Contact.FirstName }
-					/>
+				<p class="mb-4">
+					<label for="first_name" class="block text-sm font-medium text-gray-600">First Name</label>
+					<input name="firstName" id="firstName" type="text" placeholder="First Name" value={ data.Contact.FirstName } class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
 				</p>
-				<p>
-					<label for="last_name">Last Name</label>
-					<input
- 						name="lastName"
- 						id="lastName"
- 						type="text"
- 						placeholder="Last Name"
- 						value={ data.Contact.LastName }
-					/>
+				<p class="mb-4">
+					<label for="last_name" class="block text-sm font-medium text-gray-600">Last Name</label>
+					<input name="lastName" id="lastName" type="text" placeholder="Last Name" value={ data.Contact.LastName } class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
 				</p>
-				<p>
-					<label for="phone">Phone</label>
-					<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone }/>
+				<p class="mb-4">
+					<label for="phone" class="block text-sm font-medium text-gray-600">Phone</label>
+					<input name="phone" id="phone" type="text" placeholder="Phone" value={ data.Contact.Phone } class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
 				</p>
-				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit" , "Save","body","firstName lastName email Phone")
+				@PostButton("/contacts/" + fmt.Sprint(data.Contact.ID) + "/edit", "Save", "body", "firstName lastName email phone") {
+					class="bg-blue-500 text-white font-bold py-2 px-4 rounded" 
+				}
 			</fieldset>
 		</form>
-		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID),"body")
+		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID), "body") {
+			class="bg-red-500 text-white font-bold py-2 px-4 rounded mt-4" 
+		}
 	</div>
 }

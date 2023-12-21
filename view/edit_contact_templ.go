@@ -18,12 +18,6 @@ type EditContactPageData struct {
 	Errors  map[string]string
 }
 
-// templ deleteBtn() {
-// 	<button hx-target="body" hx-push-url="true" hx-delete={ "/contacts/" + fmt.Sprint(templ.URL(fmt.Sprint(data.Contact.ID))) }>
-// 		Delete Contact
-// 	</button>
-// }
-
 func prepareContactDeleteEndPoint(id int) string {
 	return "/contacts/" + fmt.Sprint(id)
 }
@@ -41,7 +35,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"main\"><form><fieldset><legend>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"main\" class=\"max-w-lg mx-auto mt-8\"><form><fieldset class=\"border p-4 rounded shadow\"><legend class=\"text-lg font-semibold mb-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -50,7 +44,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</legend><p><label for=\"email\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</legend><p class=\"mb-4\"><label for=\"email\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -75,7 +69,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"> <span class=\"validation-error\"></span></p><p><label for=\"first_name\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"> <span class=\"validation-error text-red-500\"></span></p><p class=\"mb-4\"><label for=\"first_name\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -92,7 +86,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></p><p><label for=\"last_name\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p><p class=\"mb-4\"><label for=\"last_name\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -109,7 +103,7 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></p><p><label for=\"phone\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p><p class=\"mb-4\"><label for=\"phone\" class=\"block text-sm font-medium text-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -126,11 +120,27 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500\"></p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PostButton("/contacts/"+fmt.Sprint(data.Contact.ID)+"/edit", "Save", "body", "firstName lastName email Phone").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var7 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+			if !templ_7745c5c3_IsBuffer {
+				templ_7745c5c3_Buffer = templ.GetBuffer()
+				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+			}
+			templ_7745c5c3_Var8 := `class="bg-blue-500 text-white font-bold py-2 px-4 rounded" `
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if !templ_7745c5c3_IsBuffer {
+				_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
+			}
+			return templ_7745c5c3_Err
+		})
+		templ_7745c5c3_Err = PostButton("/contacts/"+fmt.Sprint(data.Contact.ID)+"/edit", "Save", "body", "firstName lastName email phone").Render(templ.WithChildren(ctx, templ_7745c5c3_Var7), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -138,7 +148,23 @@ func EditContactPageBody(c context.Context, data EditContactPageData) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID), "body").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var9 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+			if !templ_7745c5c3_IsBuffer {
+				templ_7745c5c3_Buffer = templ.GetBuffer()
+				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+			}
+			templ_7745c5c3_Var10 := `class="bg-red-500 text-white font-bold py-2 px-4 rounded mt-4" `
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if !templ_7745c5c3_IsBuffer {
+				_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
+			}
+			return templ_7745c5c3_Err
+		})
+		templ_7745c5c3_Err = DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID), "body").Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

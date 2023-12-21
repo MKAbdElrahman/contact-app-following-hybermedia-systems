@@ -21,10 +21,10 @@ func toString(data ContactsPageData) string {
 // ActionComponent is a template for rendering actions for a contact.
 
 templ ActionComponent(c domain.Contact) {
-	<td>
-		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID),"Edit","body","")
-		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID),"View","body","")
-		@InlineDeleteButton("Delete", prepareContactDeleteEndPoint(c.ID),"closest tr")
+	<td class="flex space-x-2">
+		@GetButton(fmt.Sprintf("/contacts/%d/edit", c.ID), "Edit", "body", "")
+		@GetButton(fmt.Sprintf("/contacts/%d/view", c.ID), "View", "body", "")
+		@InlineDeleteButton("Delete", prepareContactDeleteEndPoint(c.ID), "closest tr")
 	</td>
 }
 
@@ -39,27 +39,27 @@ templ GetPageButton(url string, name string, target string,class string) {
 // ContactTable is a template for rendering a contact as a table row.
 
 templ ContactTableRow(contact domain.Contact) {
-	<tr>
-		<td class="contact-id">{ fmt.Sprint(contact.ID) }</td>
-		<td class="first-name">{ contact.FirstName }</td>
-		<td class="last-name">{ contact.LastName }</td>
-		<td class="phone">{ contact.Phone }</td>
-		<td class="email">{ contact.Email }</td>
+	<tr class="border-b hover:bg-gray-100">
+		<td class="py-2 px-4">{ fmt.Sprint(contact.ID) }</td>
+		<td class="py-2 px-4">{ contact.FirstName }</td>
+		<td class="py-2 px-4">{ contact.LastName }</td>
+		<td class="py-2 px-4">{ contact.Phone }</td>
+		<td class="py-2 px-4">{ contact.Email }</td>
 		@ActionComponent(contact)
 	</tr>
 }
 
 templ ContactsPageBody(c context.Context, data ContactsPageData , isRaw bool) {
-	<div id="main">
-		<table class="contacts-table">
+	<div id="main" class="max-w-4xl mx-auto mt-8">
+		<table class="w-full border-collapse">
 			<tbody>
 				for _, contact := range data.Contacts {
 					@ContactTableRow(contact)
 				}
 			</tbody>
 		</table>
-		<div>
-			<span style="float: center">
+		<div class="mt-4 flex justify-center">
+			<span>
 				if isRaw {
 					if  data.CurrentPage > 1 {
 						@GetButton(fmt.Sprintf("/contacts?page=%d", data.CurrentPage-1),"Previous","#main","")

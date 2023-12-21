@@ -8,13 +8,15 @@ type ViewContactPageData struct {
 }
 
 templ ViewContactPageBody(c context.Context, data ViewContactPageData) {
-	<h1>{ data.Contact.FirstName } { data.Contact.LastName }</h1>
-	<div>
-		<div>Phone: { data.Contact.Phone }</div>
-		<div>Email: { data.Contact.Email }</div>
+	<div class="max-w-lg mx-auto mt-8">
+		<h1 class="text-2xl font-bold mb-4">{ data.Contact.FirstName } { data.Contact.LastName }</h1>
+		<div class="mb-4">
+			<div class="mb-2"><span class="font-semibold">Phone:</span> { data.Contact.Phone }</div>
+			<div><span class="font-semibold">Email:</span> { data.Contact.Email }</div>
+		</div>
+		<p>
+			@GetButton(fmt.Sprintf("/contacts/%d/edit", data.Contact.ID), "Edit", "body", "")
+			@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID), "body")
+		</p>
 	</div>
-	<p>
-		@GetButton(fmt.Sprintf("/contacts/%d/edit",data.Contact.ID),"Edit","body","")
-		@DeleteButton("Delete", prepareContactDeleteEndPoint(data.Contact.ID),"body")
-	</p>
 }
