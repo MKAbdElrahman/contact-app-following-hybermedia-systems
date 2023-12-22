@@ -63,5 +63,9 @@ func NewServer(ctx context.Context, cfg ServerConfig, services Services) *echo.E
 	e.GET("/contacts/new", contactHandler.HandleGetAddContact)
 	e.POST("/contacts/new", contactHandler.HandlePostAddContact)
 
+	e.GET("/contacts/archive", contactHandler.HandleGetArchivePage)
+	e.POST("/contacts/archive/status", contactHandler.HandlePostArchive)
+	e.GET("/contacts/archive/status", contactHandler.HandleGetArchiveStatus)
+
 	return e
 }

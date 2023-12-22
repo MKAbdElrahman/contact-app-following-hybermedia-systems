@@ -18,12 +18,14 @@ import (
 type contactHandler struct {
 	contactService *service.ContactService
 	view           *view.View
+	archiver       domain.Archiver
 }
 
 func NewContactHandler(c *service.ContactService, v *view.View) *contactHandler {
 	return &contactHandler{
 		contactService: c,
 		view:           v,
+		archiver:       domain.Archiver{},
 	}
 }
 
@@ -244,4 +246,27 @@ func (h *contactHandler) HandlePostSearchContactsPage(c echo.Context) error {
 		Contacts: data,
 		Query:    c.QueryParam("q"),
 	})
+}
+
+func (h *contactHandler) HandlePostArchive(c echo.Context) error {
+
+	h.archiver.Run()
+
+	return h.view.RenderArchiveStatus(c, view.ArchivePageData{
+		Archiver: h.archiver,
+	})
+}
+
+func (h *contactHandler) HandleGetArchiveStatus(c echo.Context) error {
+
+	return h.view.RenderArchiveStatus(c, view.ArchivePageData{
+		Archiver: h.archiver,
+	})
+}
+
+
+
+
+func (h *contactHandler) HandleGetArchivePage(c echo.Context) error {
+	return h.view.RenderArchivePage(c, view.ArchivePageData{})
 }

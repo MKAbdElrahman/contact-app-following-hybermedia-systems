@@ -1,0 +1,91 @@
+package view
+
+import (
+	"github.com/labstack/echo/v4"
+	"app/domain"
+	"fmt"
+	"strconv"
+)
+
+func (r *View) RenderArchivePage(c echo.Context, data ArchivePageData) error {
+
+	page := Layout("Archive", ArchivePageBody(c.Request().Context(), data))
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
+func (r *View) RenderArchiveStatus(c echo.Context, data ArchivePageData) error {
+
+	page := ArchivePageBody(c.Request().Context(), data)
+	return page.Render(c.Request().Context(), c.Response().Writer)
+}
+
+type ArchivePageData struct {
+	Archiver domain.Archiver
+}
+
+templ ArchivePageBody(c context.Context, data ArchivePageData) {
+	<div id="archive-ui" hx-target="this" hx-swap="outerHTML" class="max-w-md mx-auto mt-8">
+		<button hx-post="/contacts/archive/status" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
+			if 	data.Archiver.Status() == domain.Waiting {
+				Download Contact Archive
+			}
+			if data.Archiver.Status() == domain.Running {
+				<div hx-get="/contacts/archive/status" hx-trigger="load delay:500ms">
+					@ProgressBar(data.Archiver.Progress())
+				</div>
+			}
+			if data.Archiver.Status() == domain.Complete {
+				Complete
+			}
+		</button>
+	</div>
+}
+
+templ ProgressBar(percentage float64) {
+	<div class="max-w-md mx-auto">
+		<div class="bg-white p-4 rounded-md shadow-md">
+			<h1 class="text-lg font-semibold mb-4">Dynamic Progress Bar</h1>
+			<!-- Progress Bar Container -->
+			<div id="progress-container" class="relative pt-1">
+				<!-- Percentage Label -->
+				<div class="flex mb-2 items-center justify-between">
+					<div class="text-right">
+						<span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">
+							{ fmt.Sprintf("%v%%", int(percentage*100)) }
+						</span>
+					</div>
+				</div>
+				<!-- Progress Bar (Dynamically Moving) -->
+				<div class="flex items-center justify-between">
+					<div class="w-full">
+						<div class={ fmt.Sprintf("overflow-hidden h-4 mb-4 text-xs flex rounded bg-gray-300 dark:bg-gray-700 w-full") }>
+							<div class={ fmt.Sprintf("h-full bg-teal-500 dark:bg-teal-400 transition-width ease-in-out duration-300 w-%v/12", barWidth(percentage)) }></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+func barWidth(percentage float64) string {
+	// Ensure percentage is within the range [0, 1]
+	if percentage < 0 {
+		percentage = 0
+	} else if percentage > 1 {
+		percentage = 1
+	}
+
+	// Scale the percentage to a range of 1 to 12
+	scaled := int(percentage*11) + 1
+
+	// Check if it's 12 and return "full"
+	if scaled == 12 {
+		return "full"
+	}
+
+	// Convert the scaled value to a string
+	result := strconv.Itoa(scaled)
+
+	return result
+}

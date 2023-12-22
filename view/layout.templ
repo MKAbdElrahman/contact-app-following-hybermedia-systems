@@ -42,6 +42,9 @@ templ Navbar() {
 				<li>
 					@navbarNewContactButton()
 				</li>
+				<li>
+					@arciveButton()
+				</li>
 			</ul>
 		</nav>
 	</section>
@@ -53,4 +56,8 @@ templ navbarSearchButton() {
 
 templ navbarNewContactButton() {
 	@GetButton("/contacts/new", "new", "body","")
+}
+
+templ arciveButton() {
+	@GetButton("/contacts/archive", "archive", "body","")
 }
