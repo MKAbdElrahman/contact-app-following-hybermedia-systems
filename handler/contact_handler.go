@@ -257,6 +257,15 @@ func (h *contactHandler) HandlePostArchive(c echo.Context) error {
 	})
 }
 
+func (h *contactHandler) HandleDeleteArchive(c echo.Context) error {
+
+	h.archiver.Reset()
+
+	return h.view.RenderArchiveStatus(c, view.ArchivePageData{
+		Archiver: h.archiver,
+	})
+}
+
 func (h *contactHandler) HandleGetArchiveStatus(c echo.Context) error {
 
 	return h.view.RenderArchiveStatus(c, view.ArchivePageData{
@@ -264,8 +273,11 @@ func (h *contactHandler) HandleGetArchiveStatus(c echo.Context) error {
 	})
 }
 
+func (h *contactHandler) HandleGetArchiveFile(c echo.Context) error {
 
+	return c.Attachment("go.mod", "archive.txt")
 
+}
 
 func (h *contactHandler) HandleGetArchivePage(c echo.Context) error {
 	return h.view.RenderArchivePage(c, view.ArchivePageData{})

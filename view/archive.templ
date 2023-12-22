@@ -25,17 +25,24 @@ type ArchivePageData struct {
 
 templ ArchivePageBody(c context.Context, data ArchivePageData) {
 	<div id="archive-ui" hx-target="this" hx-swap="outerHTML" class="max-w-md mx-auto mt-8">
-		<button hx-post="/contacts/archive/status" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
-			if 	data.Archiver.Status() == domain.Waiting {
+		<button hx-post="/contacts/archive/status" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue">
+			if data.Archiver.Status() == domain.Waiting {
 				Download Contact Archive
 			}
 			if data.Archiver.Status() == domain.Running {
-				<div hx-get="/contacts/archive/status" hx-trigger="load delay:500ms">
-					@ProgressBar(data.Archiver.Progress())
+				<div class="progress">
+					<div id="archive-progress" hx-get="/contacts/archive/status" hx-trigger="load delay:500ms">
+						@ProgressBar(data.Archiver.Progress())
+					</div>
 				</div>
 			}
 			if data.Archiver.Status() == domain.Complete {
-				Complete
+				<a hx-boost="false" href="/contacts/archive/file" class="text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-green">
+					Archive Ready! Click here to download. &downarrow;
+				</a>
+				<button hx-delete="/contacts/archive" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">
+					Clear Download
+				</button>
 			}
 		</button>
 	</div>
@@ -58,8 +65,8 @@ templ ProgressBar(percentage float64) {
 				<!-- Progress Bar (Dynamically Moving) -->
 				<div class="flex items-center justify-between">
 					<div class="w-full">
-						<div class={ fmt.Sprintf("overflow-hidden h-4 mb-4 text-xs flex rounded bg-gray-300 dark:bg-gray-700 w-full") }>
-							<div class={ fmt.Sprintf("h-full bg-teal-500 dark:bg-teal-400 transition-width ease-in-out duration-300 w-%v/12", barWidth(percentage)) }></div>
+						<div class={ fmt.Sprintf("overflow-hidden h-4 mb-4 text-xs flex rounded bg-gray-300 dark:bg-gray-700 w-full transition-all ease-in-out duration-500") }>
+							<div class={ fmt.Sprintf("h-full bg-teal-500 dark:bg-teal-400 w-%v/12", barWidth(percentage)) }></div>
 						</div>
 					</div>
 				</div>
